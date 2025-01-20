@@ -1,0 +1,2995 @@
+---
+info:
+  _postman_id: 6ba20e96-1aef-4d87-a012-14cff8340b02
+  name: Transaction APIs
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  _exporter_id: '40006945'
+  _collection_link: https://grey-shadow-488395.postman.co/workspace/OPEN-WALLET~f371a458-f95c-4330-847b-cc756a47dfa6/collection/40006945-6ba20e96-1aef-4d87-a012-14cff8340b02?action=share&source=collection_link&creator=40006945
+item:
+- name: Authentication
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Successful PUT request", function () {
+      - "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);"
+      - "});"
+      - ''
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header: []
+    body:
+      mode: raw
+      raw: |2-
+         {
+          "username": "openwallet",
+          "password": "O-W",
+          "channel": "OW"
+        }
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{uat_url}}/authenticate"
+      host:
+      - "{{uat_url}}"
+      path:
+      - authenticate
+    description: |-
+      This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).
+
+      A successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code.
+  response:
+  - name: Authentication response
+    originalRequest:
+      method: POST
+      header: []
+      body:
+        mode: raw
+        raw: |2-
+           {
+            "username": "openwallet",
+            "password": "O-W",
+            "channel": "OW"
+          }
+        options:
+          raw:
+            language: json
+      url:
+        raw: localhost:8080/api/v1/wallet/authenticate
+        host:
+        - localhost
+        port: '8080'
+        path:
+        - api
+        - v1
+        - wallet
+        - authenticate
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Content-Type
+      value: application/json
+      description: ''
+      type: text
+    cookie: []
+    body: "{\r\n    \"jwt\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjZGN8Y2RjIiwiZXhwIjoxNjc5NzMwNTM3LCJpYXQiOjE2Nzk2NDQxMzd9._8vbOSswyEHXGJCHthVRsJ2JMBqxxi3MGnI_jFl-BuuV91IeBr7T8BNjFssSuQexYK_JImN7o9hSAiwWsR6MFQ\",\r\n
+      \   \"expiry\": \"1679730537\"\r\n}"
+- name: Title fetch
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Successful PUT request", function () {
+      - "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);"
+      - "});"
+      - ''
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2NzY4MjgxLCJleHAiOjE3MzY4NTQ2ODF9.eNiFybSlQf4AeBboeCy_Es4e-o-E90OMEb2MHBpAl6g
+      type: text
+    body:
+      mode: raw
+      raw: |-
+        {
+          "rrn": "123412341234",
+          "stan": "123412",
+          "channel": "001",
+          "transactionDate": "21-11-2024 12:00:00",
+          "transaction": {
+            "code": "0010",
+            "amount": {
+              "value": 1000,
+              "currency": "PKR"
+            }
+          },
+          "toAccount": {
+            "accountNumber": "03001231235"
+          },
+          "additionalInfo": {
+              "reservedFields": {
+                "reservedField01": "",
+                "reservedField02": ""
+            }
+          }
+        }
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{base_url}}/payments/title"
+      host:
+      - "{{base_url}}"
+      path:
+      - payments
+      - title
+    description: |-
+      This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).
+
+      A successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code.
+  response:
+  - name: Title fetch
+    originalRequest:
+      method: POST
+      header: []
+      body:
+        mode: raw
+        raw: |-
+          {
+            "rrn": "123412341234",
+            "stan": "123412",
+            "channel": "001",
+            "transactionDate": "21-11-2024 12:00:00.000",
+            "transaction": {
+              "code": "0011",
+              "amount": {
+                "value": 1000,
+                "currency": "PKR"
+              }
+            },
+            "toAccount": {
+              "accountNumber": "212900100000001"
+            },
+            "additionalInfo": {
+                "reservedFields": {
+                  "reservedField01": "",
+                  "reservedField02": ""
+              }
+            }
+          }
+        options:
+          raw:
+            language: json
+      url:
+        raw: localhost:8080/api/v1/wallet/payments/title
+        host:
+        - localhost
+        port: '8080'
+        path:
+        - api
+        - v1
+        - wallet
+        - payments
+        - title
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Content-Type
+      value: application/json
+      description: ''
+      type: text
+    cookie: []
+    body: "{\r\n  \"responseCode\": \"00\",\r\n  \"responseDesc\": \"SUCCESS\",\r\n
+      \ \"data\": {\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"21-11-2024
+      12:00:00.000\",\r\n    \"stan\": \"123456\",\r\n    \"rrn\": \"123456123456\",\r\n
+      \   \"referenceNumber\": \"21290000000000000001\",\r\n    \"transaction\": {\r\n
+      \     \"code\": \"01\",\r\n      \"amount\": {\r\n        \"value\": 1000,\r\n
+      \       \"currency\": \"PKR\"\r\n      }\r\n    },\r\n    \"toAccount\": {\r\n
+      \     \"accountNumber\": \"212900100000001\",\r\n      \"iban\": \"PK00CDNS0212900100000001\",\r\n
+      \     \"title\": \"Hassan and Ali\",\r\n      \"availableCreditLimit\": 50000,\r\n
+      \     \"customerType\": \"joint\",\r\n      \"mobile\": \"03132370605\",\r\n
+      \     \"email\": \"waqas@test.com\"\r\n    },\r\n    \"primaryCustomer\": {\r\n
+      \     \"idType\": \"CNIC\",\r\n      \"idValue\": \"1234512345671\"\r\n    },\r\n
+      \   \"secondaryCustomer\": {\r\n      \"idType\": \"CNIC\",\r\n      \"idValue\":
+      \"1234512345672\"\r\n    },\r\n    \"additionalInfo\": {\r\n      \"reservedFields\":
+      {\r\n        \"reservedField01\": \"\",\r\n        \"reservedField02\": \"\"\r\n
+      \     }\r\n    }\r\n  }\r\n}"
+  - name: Title fetch 2
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2MzIzOTM0LCJleHAiOjE3MzY0MTAzMzR9.oMfiH-d_9bonOf7gFcgDeSrhGV2IRdwUje3ORP5nKIU
+        type: text
+      body:
+        mode: raw
+        raw: |-
+          {
+            "rrn": "123412141234",
+            "stan": "123412",
+            "channel": "001",
+            "transactionDate": "21-11-2024 12:00:00",
+            "transaction": {
+              "code": "0010",
+              "amount": {
+                "value": 1000,
+                "currency": "PKR"
+              }
+            },
+            "toAccount": {
+              "accountNumber": "03001231234"
+            },
+            "additionalInfo": {
+                "reservedFields": {
+                  "reservedField01": "",
+                  "reservedField02": ""
+              }
+            }
+          }
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/title"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - title
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Wed, 08 Jan 2025 08:25:05 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "123412141234",
+              "stan": "123412",
+              "transactionDate": "21-11-2024 12:00:00",
+              "channel": "001",
+              "transaction": {
+                  "code": "0010",
+                  "amount": {
+                      "value": 1000,
+                      "currency": "PKR"
+                  }
+              },
+              "primaryCustomer": {
+                  "idType": "001",
+                  "idValue": "3243243243242"
+              },
+              "toAccount": {
+                  "accountNumber": "03001231234",
+                  "iban": "PK59CRSM0000003001231234",
+                  "title": "Saeed",
+                  "availableCreditLimit": 200000,
+                  "customerType": "Single"
+              },
+              "additionalInfo": {
+                  "reservedFields": {
+                      "reservedField01": "",
+                      "reservedField02": ""
+                  }
+              }
+          }
+      }
+- name: Incoming Payment (CREDIT)
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2MzIzOTM0LCJleHAiOjE3MzY0MTAzMzR9.oMfiH-d_9bonOf7gFcgDeSrhGV2IRdwUje3ORP5nKIU
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n  \"channel\": \"004\",\r\n  \"transactionDate\": \"21-11-2024 12:00:00\",\r\n
+        \ \"stan\": \"123456\",\r\n  \"rrn\": \"123456223356\",\r\n  \"transaction\":
+        {\r\n    \"code\": \"0020\",\r\n    \"purposeCode\": \"0112\",\r\n    \"narration\":
+        \"Test transaction\",\r\n    \"amount\": {\r\n      \"currency\": \"PKR\",\r\n
+        \     \"value\": 1000\r\n    }\r\n  },\r\n  \"toAccount\": {\r\n    \"accountNumber\":
+        \"03001231234\",\r\n    \"accountTitle\": \"Hassan Ali\",\r\n    \"accountType\":
+        \"00\",\r\n    \"accountCurrency\": \"586\",\r\n    \"primaryCustomer\": {\r\n
+        \     \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345673\"\r\n
+        \   },\r\n    \"secondaryCustomer\": {\r\n      \"identType\": \"CNIC\",\r\n
+        \     \"identValue\": \"1234512345674\"\r\n    }\r\n  },\r\n  \"additionalInfo\":
+        {\r\n    \"accountInfo\": {\r\n      \"trackData\": \"1234512345671\",\r\n
+        \     \"trackDataExtended\": \"0000000000000000\"\r\n    },\r\n    \"merchantInfo\":
+        {\r\n      \"merchantCategoryCode\": \"5399\",\r\n      \"acquiringInstitutionIdentificationCode\":
+        \"100271\",\r\n      \"forwardingInstitutionIdentificationCode\": \"987654\",\r\n
+        \     \"merchantIdCode\": \"ABC123456\",\r\n      \"merchantNameLocation\":
+        \"Test Merchant\"\r\n    },\r\n    \"terminalInfo\": {\r\n      \"terminalId\":
+        \"ATM01\",\r\n      \"additionalTerminalLocation\": \"000000\",\r\n      \"terminalLocation\":
+        \"000000\",\r\n      \"pointOfServiceEntryMode\": \"021\",\r\n      \"pointOfServiceConditionCode\":
+        \"00\"\r\n    },\r\n    \"settlementInfo\": {\r\n      \"settlementDate\":
+        \"121212\",\r\n      \"captureDate\": \"000000\",\r\n      \"currencyCodeTransaction\":
+        \"586\",\r\n      \"currencyCodeSettlement\": \"586\",\r\n      \"currencyCodeCardholderBilling\":
+        \"586\"\r\n    },\r\n    \"securityInfo\": {\r\n      \"securityControlInfo\":
+        \"200000\",\r\n      \"iccData\": \"0987654321\",\r\n      \"securityControlInfoVisaMastercard\":
+        \"000000\"\r\n    },\r\n    \"responseInfo\": {\r\n      \"authorizationIdentificationResponseCode\":
+        \"123456\",\r\n      \"messageAuthenticationCode\": \"2000000000000000\"\r\n
+        \   },\r\n    \"reservedFields\": {\r\n      \"reservedField01\": \"\",\r\n
+        \     \"reservedField02\": \"\",\r\n      \"reservedField03\": \"\",\r\n      \"reservedField04\":
+        \"\",\r\n      \"reservedField05\": \"\"\r\n    },\r\n    \"networkInfo\":
+        {\r\n      \"networkInternationalIdentifier\": \"001\",\r\n      \"networkDestinationIdentifier\":
+        \"001\"\r\n    },\r\n    \"transactionInfoExtended\": {\r\n      \"networkInternationalIdentifier\":
+        \"001\",\r\n      \"networkDestinationIdentifier\": \"001\",\r\n      \"acquiringInstitutionId\":
+        \"100271\",\r\n      \"forwardingInstitutionId\": \"987654\"\r\n    }\r\n
+        \ }\r\n}"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{base_url}}/payments/executeTrx"
+      host:
+      - "{{base_url}}"
+      path:
+      - payments
+      - executeTrx
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response:
+  - name: Incoming Payment (CREDIT) response
+    originalRequest:
+      method: POST
+      header: []
+      body:
+        mode: raw
+        raw: "{\r\n  \"channel\": \"001\",\r\n  \"transactionDate\": \"21-11-2024
+          12:00:00\",\r\n  \"stan\": \"123456\",\r\n  \"rrn\": \"123456123456\",\r\n
+          \ \"transaction\": {\r\n    \"code\": \"0020\",\r\n    \"purposeCode\":
+          \"0112\",\r\n    \"narration\": \"Test transaction\",\r\n    \"amount\":
+          {\r\n      \"currency\": \"PKR\",\r\n      \"value\": 1000\r\n    },\r\n
+          \   \"fee\": {\r\n      \"feeAmount\": 100\r\n    },\r\n    \"tip\": {\r\n
+          \     \"tipAmount\": 10\r\n    }\r\n  },\r\n  \"fromAccount\": {\r\n    \"accountNumber\":
+          \"05421236547552\",\r\n    \"accountTitle\": \"Muhammad Ali & Hassan Ali\",\r\n
+          \   \"accountType\": \"00\",\r\n    \"accountCurrency\": \"586\",\r\n    \"primaryCustomer\":
+          {\r\n      \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345671\"\r\n
+          \   },\r\n    \"secondaryCustomer\": {\r\n      \"identType\": \"CNIC\",\r\n
+          \     \"identValue\": \"1234512345672\"\r\n    }\r\n  },\r\n  \"toAccount\":
+          {\r\n    \"accountNumber\": \"212900100000001\",\r\n    \"accountTitle\":
+          \"Hassan Ali\",\r\n    \"accountType\": \"00\",\r\n    \"accountCurrency\":
+          \"586\",\r\n    \"primaryCustomer\": {\r\n      \"identType\": \"CNIC\",\r\n
+          \     \"identValue\": \"1234512345673\"\r\n    },\r\n    \"secondaryCustomer\":
+          {\r\n      \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345674\"\r\n
+          \   }\r\n  },\r\n  \"additionalInfo\": {\r\n    \"accountInfo\": {\r\n      \"trackData\":
+          \"1234512345671\",\r\n      \"trackDataExtended\": \"0000000000000000\"\r\n
+          \   },\r\n    \"merchantInfo\": {\r\n      \"merchantCategoryCode\": \"5399\",\r\n
+          \     \"acquiringInstitutionIdentificationCode\": \"100271\",\r\n      \"forwardingInstitutionIdentificationCode\":
+          \"987654\",\r\n      \"merchantIdCode\": \"ABC123456\",\r\n      \"merchantNameLocation\":
+          \"Test Merchant\"\r\n    },\r\n    \"terminalInfo\": {\r\n      \"terminalId\":
+          \"ATM01\",\r\n      \"additionalTerminalLocation\": \"000000\",\r\n      \"terminalLocation\":
+          \"000000\",\r\n      \"pointOfServiceEntryMode\": \"021\",\r\n      \"pointOfServiceConditionCode\":
+          \"00\"\r\n    },\r\n    \"settlementInfo\": {\r\n      \"settlementDate\":
+          \"121212\",\r\n      \"captureDate\": \"000000\",\r\n      \"currencyCodeTransaction\":
+          \"586\",\r\n      \"currencyCodeSettlement\": \"586\",\r\n      \"currencyCodeCardholderBilling\":
+          \"586\"\r\n    },\r\n    \"securityInfo\": {\r\n      \"securityControlInfo\":
+          \"200000\",\r\n      \"iccData\": \"0987654321\",\r\n      \"securityControlInfoVisaMastercard\":
+          \"000000\"\r\n    },\r\n    \"responseInfo\": {\r\n      \"authorizationIdentificationResponseCode\":
+          \"123456\",\r\n      \"messageAuthenticationCode\": \"2000000000000000\"\r\n
+          \   },\r\n    \"reservedFields\": {\r\n      \"reservedField01\": \"\",\r\n
+          \     \"reservedField02\": \"\",\r\n      \"reservedField03\": \"\",\r\n
+          \     \"reservedField04\": \"\",\r\n      \"reservedField05\": \"\"\r\n
+          \   },\r\n    \"networkInfo\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\"\r\n    },\r\n
+          \   \"transactionInfoExtended\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\",\r\n      \"acquiringInstitutionId\":
+          \"100271\",\r\n      \"forwardingInstitutionId\": \"987654\"\r\n    }\r\n
+          \ }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: localhost:8080/api/v1/wallet/payments/executeTrx
+        host:
+        - localhost
+        port: '8080'
+        path:
+        - api
+        - v1
+        - wallet
+        - payments
+        - executeTrx
+    _postman_previewlanguage: json
+    header:
+    - key: Content-Type
+      value: application/json
+      description: ''
+      type: text
+    cookie: []
+    body: |-
+      {
+        "responseCode": "00",
+        "responseDesc": "SUCCESS",
+        "data": {
+          "channel": "001",
+          "transactionDate": "21-11-2024 12:00:00",
+          "stan": "123456",
+          "rrn": "123456123456",
+          "referenceNumber": "21290000000000000001",
+          "transaction": [
+            {
+              "code": "0020",
+              "amount": 1000,
+              "type": "C",
+              "stan": "123125",
+              "accountNumber": "212900100000002",
+              "iban": "PK00CDNS0212900100000002",
+              "postingDate": "21-11-2024 12:00:00",
+              "narration": "IBFT - Credit"
+            }
+          ]
+        }
+      }
+  - name: Incoming Payment from actual API(CREDIT)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzMzOTQyMDczLCJleHAiOjE3MzQwMjg0NzN9.d2yZm9m5L5BtLHEilVAwh2h8oJovQrST71eX1_Ids5E
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n  \"channel\": \"001\",\r\n  \"transactionDate\": \"21-11-2024
+          12:00:00\",\r\n  \"stan\": \"123456\",\r\n  \"rrn\": \"123456223356\",\r\n
+          \ \"transaction\": {\r\n    \"code\": \"0020\",\r\n    \"purposeCode\":
+          \"0112\",\r\n    \"narration\": \"Test transaction\",\r\n    \"amount\":
+          {\r\n      \"currency\": \"PKR\",\r\n      \"value\": 1000\r\n    }\r\n
+          \ },\r\n  \"fromAccount\": {\r\n    \"accountNumber\": \"05421236547552\",\r\n
+          \   \"accountTitle\": \"Muhammad Ali & Hassan Ali\",\r\n    \"accountType\":
+          \"00\",\r\n    \"accountCurrency\": \"586\",\r\n    \"primaryCustomer\":
+          {\r\n      \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345671\"\r\n
+          \   },\r\n    \"secondaryCustomer\": {\r\n      \"identType\": \"CNIC\",\r\n
+          \     \"identValue\": \"1234512345672\"\r\n    }\r\n  },\r\n  \"toAccount\":
+          {\r\n    \"accountNumber\": \"0900000000000002\",\r\n    \"accountTitle\":
+          \"Hassan Ali\",\r\n    \"accountType\": \"00\",\r\n    \"accountCurrency\":
+          \"586\",\r\n    \"primaryCustomer\": {\r\n      \"identType\": \"CNIC\",\r\n
+          \     \"identValue\": \"1234512345673\"\r\n    },\r\n    \"secondaryCustomer\":
+          {\r\n      \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345674\"\r\n
+          \   }\r\n  },\r\n  \"additionalInfo\": {\r\n    \"accountInfo\": {\r\n      \"trackData\":
+          \"1234512345671\",\r\n      \"trackDataExtended\": \"0000000000000000\"\r\n
+          \   },\r\n    \"merchantInfo\": {\r\n      \"merchantCategoryCode\": \"5399\",\r\n
+          \     \"acquiringInstitutionIdentificationCode\": \"100271\",\r\n      \"forwardingInstitutionIdentificationCode\":
+          \"987654\",\r\n      \"merchantIdCode\": \"ABC123456\",\r\n      \"merchantNameLocation\":
+          \"Test Merchant\"\r\n    },\r\n    \"terminalInfo\": {\r\n      \"terminalId\":
+          \"ATM01\",\r\n      \"additionalTerminalLocation\": \"000000\",\r\n      \"terminalLocation\":
+          \"000000\",\r\n      \"pointOfServiceEntryMode\": \"021\",\r\n      \"pointOfServiceConditionCode\":
+          \"00\"\r\n    },\r\n    \"settlementInfo\": {\r\n      \"settlementDate\":
+          \"121212\",\r\n      \"captureDate\": \"000000\",\r\n      \"currencyCodeTransaction\":
+          \"586\",\r\n      \"currencyCodeSettlement\": \"586\",\r\n      \"currencyCodeCardholderBilling\":
+          \"586\"\r\n    },\r\n    \"securityInfo\": {\r\n      \"securityControlInfo\":
+          \"200000\",\r\n      \"iccData\": \"0987654321\",\r\n      \"securityControlInfoVisaMastercard\":
+          \"000000\"\r\n    },\r\n    \"responseInfo\": {\r\n      \"authorizationIdentificationResponseCode\":
+          \"123456\",\r\n      \"messageAuthenticationCode\": \"2000000000000000\"\r\n
+          \   },\r\n    \"reservedFields\": {\r\n      \"reservedField01\": \"\",\r\n
+          \     \"reservedField02\": \"\",\r\n      \"reservedField03\": \"\",\r\n
+          \     \"reservedField04\": \"\",\r\n      \"reservedField05\": \"\"\r\n
+          \   },\r\n    \"networkInfo\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\"\r\n    },\r\n
+          \   \"transactionInfoExtended\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\",\r\n      \"acquiringInstitutionId\":
+          \"100271\",\r\n      \"forwardingInstitutionId\": \"987654\"\r\n    }\r\n
+          \ }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Thu, 12 Dec 2024 07:25:59 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "123456223356",
+              "stan": "123456",
+              "transactionDate": "21-11-2024 12:00:00",
+              "channel": "001",
+              "referenceNumber": "0900000000000000000000007",
+              "transaction": [
+                  {
+                      "code": "0020",
+                      "amount": 1000,
+                      "type": "C",
+                      "stan": "123456",
+                      "accountNumber": "0900000000000002",
+                      "postingDate": "22-11-2024 12:00:00",
+                      "narration": "Incoming IBFT"
+                  }
+              ]
+          }
+      }
+  - name: Incoming Payment (CREDIT) 2
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2MzIzOTM0LCJleHAiOjE3MzY0MTAzMzR9.oMfiH-d_9bonOf7gFcgDeSrhGV2IRdwUje3ORP5nKIU
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n  \"channel\": \"004\",\r\n  \"transactionDate\": \"21-11-2024
+          12:00:00\",\r\n  \"stan\": \"123456\",\r\n  \"rrn\": \"123456223356\",\r\n
+          \ \"transaction\": {\r\n    \"code\": \"0020\",\r\n    \"purposeCode\":
+          \"0112\",\r\n    \"narration\": \"Test transaction\",\r\n    \"amount\":
+          {\r\n      \"currency\": \"PKR\",\r\n      \"value\": 1000\r\n    }\r\n
+          \ },\r\n  \"toAccount\": {\r\n    \"accountNumber\": \"03001231234\",\r\n
+          \   \"accountTitle\": \"Hassan Ali\",\r\n    \"accountType\": \"00\",\r\n
+          \   \"accountCurrency\": \"586\",\r\n    \"primaryCustomer\": {\r\n      \"identType\":
+          \"CNIC\",\r\n      \"identValue\": \"1234512345673\"\r\n    },\r\n    \"secondaryCustomer\":
+          {\r\n      \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345674\"\r\n
+          \   }\r\n  },\r\n  \"additionalInfo\": {\r\n    \"accountInfo\": {\r\n      \"trackData\":
+          \"1234512345671\",\r\n      \"trackDataExtended\": \"0000000000000000\"\r\n
+          \   },\r\n    \"merchantInfo\": {\r\n      \"merchantCategoryCode\": \"5399\",\r\n
+          \     \"acquiringInstitutionIdentificationCode\": \"100271\",\r\n      \"forwardingInstitutionIdentificationCode\":
+          \"987654\",\r\n      \"merchantIdCode\": \"ABC123456\",\r\n      \"merchantNameLocation\":
+          \"Test Merchant\"\r\n    },\r\n    \"terminalInfo\": {\r\n      \"terminalId\":
+          \"ATM01\",\r\n      \"additionalTerminalLocation\": \"000000\",\r\n      \"terminalLocation\":
+          \"000000\",\r\n      \"pointOfServiceEntryMode\": \"021\",\r\n      \"pointOfServiceConditionCode\":
+          \"00\"\r\n    },\r\n    \"settlementInfo\": {\r\n      \"settlementDate\":
+          \"121212\",\r\n      \"captureDate\": \"000000\",\r\n      \"currencyCodeTransaction\":
+          \"586\",\r\n      \"currencyCodeSettlement\": \"586\",\r\n      \"currencyCodeCardholderBilling\":
+          \"586\"\r\n    },\r\n    \"securityInfo\": {\r\n      \"securityControlInfo\":
+          \"200000\",\r\n      \"iccData\": \"0987654321\",\r\n      \"securityControlInfoVisaMastercard\":
+          \"000000\"\r\n    },\r\n    \"responseInfo\": {\r\n      \"authorizationIdentificationResponseCode\":
+          \"123456\",\r\n      \"messageAuthenticationCode\": \"2000000000000000\"\r\n
+          \   },\r\n    \"reservedFields\": {\r\n      \"reservedField01\": \"\",\r\n
+          \     \"reservedField02\": \"\",\r\n      \"reservedField03\": \"\",\r\n
+          \     \"reservedField04\": \"\",\r\n      \"reservedField05\": \"\"\r\n
+          \   },\r\n    \"networkInfo\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\"\r\n    },\r\n
+          \   \"transactionInfoExtended\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\",\r\n      \"acquiringInstitutionId\":
+          \"100271\",\r\n      \"forwardingInstitutionId\": \"987654\"\r\n    }\r\n
+          \ }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Wed, 08 Jan 2025 08:27:39 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "123456223356",
+              "stan": "123456",
+              "transactionDate": "21-11-2024 12:00:00",
+              "channel": "004",
+              "referenceNumber": "0900000000000000000000269",
+              "authCode": "123456",
+              "transaction": [
+                  {
+                      "code": "0020",
+                      "amount": 1000,
+                      "type": "C",
+                      "stan": "123456",
+                      "accountNumber": "03001231234",
+                      "postingDate": "22-11-2024 12:00:00.000",
+                      "narration": "Incoming IBFT"
+                  }
+              ]
+          }
+      }
+- name: Outgoing Payment (DEBIT)
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2Nzc2NjMxLCJleHAiOjE3MzY4NjMwMzF9.Xqub5AHsOkHGDY6JKsvS3KB7CEew_bx9Jsb5keqZhI0
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"14-01-2025
+        16:33:41\",\r\n    \"stan\": \"112112\",\r\n    \"rrn\": \"112112112112\",\r\n
+        \   \"transaction\": {\r\n        \"code\": \"0030\",\r\n        \"purposeCode\":
+        \"1001\",\r\n        \"narration\": \"Payment for services\",\r\n        \"amount\":
+        {\r\n            \"currency\": \"PKR\",\r\n            \"value\": 100000\r\n
+        \       },\r\n        \"fee\": {\r\n            \"feeAmount\": 0\r\n        },\r\n
+        \       \"tip\": {\r\n            \"tipAmount\": 0\r\n        }\r\n    },\r\n
+        \   \"fromAccount\": {\r\n        \"accountNumber\": \"03001231235\",\r\n
+        \       \"accountCurrency\": \"586\"\r\n    },\r\n    \"additionalInfo\":
+        {\r\n        \"reservedFields\": {}\r\n    }\r\n}"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{uat_url}}/payments/executeTrx"
+      host:
+      - "{{uat_url}}"
+      path:
+      - payments
+      - executeTrx
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response:
+  - name: Outgoing Payment (DEBIT) response
+    originalRequest:
+      method: POST
+      header: []
+      body:
+        mode: raw
+        raw: "{\r\n  \"channel\": \"001\",\r\n  \"transactionDate\": \"21-11-2024
+          12:00:00\",\r\n  \"stan\": \"123456\",\r\n  \"rrn\": \"123456123456\",\r\n
+          \ \"transaction\": {\r\n    \"code\": \"0020\",\r\n    \"purposeCode\":
+          \"0112\",\r\n    \"narration\": \"Test transaction\",\r\n    \"amount\":
+          {\r\n      \"currency\": \"PKR\",\r\n      \"value\": 1000\r\n    },\r\n
+          \   \"fee\": {\r\n      \"feeAmount\": 100\r\n    },\r\n    \"tip\": {\r\n
+          \     \"tipAmount\": 10\r\n    }\r\n  },\r\n  \"fromAccount\": {\r\n    \"accountNumber\":
+          \"05421236547552\",\r\n    \"accountTitle\": \"Muhammad Ali & Hassan Ali\",\r\n
+          \   \"accountType\": \"00\",\r\n    \"accountCurrency\": \"586\",\r\n    \"primaryCustomer\":
+          {\r\n      \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345671\"\r\n
+          \   },\r\n    \"secondaryCustomer\": {\r\n      \"identType\": \"CNIC\",\r\n
+          \     \"identValue\": \"1234512345672\"\r\n    }\r\n  },\r\n  \"toAccount\":
+          {\r\n    \"accountNumber\": \"212900100000001\",\r\n    \"accountTitle\":
+          \"Hassan Ali\",\r\n    \"accountType\": \"00\",\r\n    \"accountCurrency\":
+          \"586\",\r\n    \"primaryCustomer\": {\r\n      \"identType\": \"CNIC\",\r\n
+          \     \"identValue\": \"1234512345673\"\r\n    },\r\n    \"secondaryCustomer\":
+          {\r\n      \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345674\"\r\n
+          \   }\r\n  },\r\n  \"additionalInfo\": {\r\n    \"accountInfo\": {\r\n      \"trackData\":
+          \"1234512345671\",\r\n      \"trackDataExtended\": \"0000000000000000\"\r\n
+          \   },\r\n    \"merchantInfo\": {\r\n      \"merchantCategoryCode\": \"5399\",\r\n
+          \     \"acquiringInstitutionIdentificationCode\": \"100271\",\r\n      \"forwardingInstitutionIdentificationCode\":
+          \"987654\",\r\n      \"merchantIdCode\": \"ABC123456\",\r\n      \"merchantNameLocation\":
+          \"Test Merchant\"\r\n    },\r\n    \"terminalInfo\": {\r\n      \"terminalId\":
+          \"ATM01\",\r\n      \"additionalTerminalLocation\": \"000000\",\r\n      \"terminalLocation\":
+          \"000000\",\r\n      \"pointOfServiceEntryMode\": \"021\",\r\n      \"pointOfServiceConditionCode\":
+          \"00\"\r\n    },\r\n    \"settlementInfo\": {\r\n      \"settlementDate\":
+          \"121212\",\r\n      \"captureDate\": \"000000\",\r\n      \"currencyCodeTransaction\":
+          \"586\",\r\n      \"currencyCodeSettlement\": \"586\",\r\n      \"currencyCodeCardholderBilling\":
+          \"586\"\r\n    },\r\n    \"securityInfo\": {\r\n      \"securityControlInfo\":
+          \"200000\",\r\n      \"iccData\": \"0987654321\",\r\n      \"securityControlInfoVisaMastercard\":
+          \"000000\"\r\n    },\r\n    \"responseInfo\": {\r\n      \"authorizationIdentificationResponseCode\":
+          \"123456\",\r\n      \"messageAuthenticationCode\": \"2000000000000000\"\r\n
+          \   },\r\n    \"reservedFields\": {\r\n      \"reservedField01\": \"\",\r\n
+          \     \"reservedField02\": \"\",\r\n      \"reservedField03\": \"\",\r\n
+          \     \"reservedField04\": \"\",\r\n      \"reservedField05\": \"\"\r\n
+          \   },\r\n    \"networkInfo\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\"\r\n    },\r\n
+          \   \"transactionInfoExtended\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\",\r\n      \"acquiringInstitutionId\":
+          \"100271\",\r\n      \"forwardingInstitutionId\": \"987654\"\r\n    }\r\n
+          \ }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: localhost:8080/api/v1/wallet/payments/executeTrx
+        host:
+        - localhost
+        port: '8080'
+        path:
+        - api
+        - v1
+        - wallet
+        - payments
+        - executeTrx
+    _postman_previewlanguage: json
+    header:
+    - key: Content-Type
+      value: application/json
+      description: ''
+      type: text
+    cookie: []
+    body: |-
+      {
+        "responseCode": "00",
+        "responseDesc": "SUCCESS",
+        "data": {
+          "channel": "001",
+          "transactionDate": "21-11-2024 12:00:00",
+          "stan": "123456",
+          "rrn": "123456123456",
+          "referenceNumber": "21290000000000000001",
+          "transaction": [
+            {
+              "code": "0031",
+              "amount": 10,
+              "type": "D",
+              "stan": "123124",
+              "accountNumber": "212900100000002",
+              "iban": "PK00CDNS0212900100000002",
+              "postingDate": "21-11-2024 12:00:00",
+              "narration": "Fee"
+            },
+            {
+              "code": "0032",
+              "amount": 100,
+              "type": "D",
+              "stan": "123124",
+              "accountNumber": "212900100000002",
+              "iban": "PK00CDNS0212900100000002",
+              "postingDate": "21-11-2024 12:00:00",
+              "narration": "Tip"
+            },
+            {
+              "code": "0030",
+              "amount": 1000,
+              "type": "D",
+              "stan": "123125",
+              "accountNumber": "212900100000002",
+              "iban": "PK00CDNS0212900100000002",
+              "postingDate": "21-11-2024 12:00:00",
+              "narration": "IBFT - Debit"
+            }
+          ]
+        }
+      }
+  - name: Outgoing Payment actual API (DEBIT)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzMzOTQyMDczLCJleHAiOjE3MzQwMjg0NzN9.d2yZm9m5L5BtLHEilVAwh2h8oJovQrST71eX1_Ids5E
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n  \"channel\": \"001\",\r\n  \"transactionDate\": \"21-11-2024
+          12:00:00\",\r\n  \"stan\": \"123456\",\r\n  \"rrn\": \"123456123456\",\r\n
+          \ \"transaction\": {\r\n    \"code\": \"0030\",\r\n    \"purposeCode\":
+          \"0112\",\r\n    \"narration\": \"Test transaction\",\r\n    \"amount\":
+          {\r\n      \"currency\": \"PKR\",\r\n      \"value\": 1000\r\n    },\r\n
+          \   \"fee\": {\r\n      \"feeAmount\": 100\r\n    },\r\n    \"tip\": {\r\n
+          \     \"tipAmount\": 10\r\n    }\r\n  },\r\n  \"fromAccount\": {\r\n    \"accountNumber\":
+          \"0900000000000002\",\r\n    \"accountTitle\": \"Muhammad Ali & Hassan Ali\",\r\n
+          \   \"accountType\": \"00\",\r\n    \"accountCurrency\": \"586\",\r\n    \"primaryCustomer\":
+          {\r\n      \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345671\"\r\n
+          \   },\r\n    \"secondaryCustomer\": {\r\n      \"identType\": \"CNIC\",\r\n
+          \     \"identValue\": \"1234512345672\"\r\n    }\r\n  },\r\n  \"toAccount\":
+          {\r\n    \"accountNumber\": \"212900100000001\",\r\n    \"accountTitle\":
+          \"Hassan Ali\",\r\n    \"accountType\": \"00\",\r\n    \"accountCurrency\":
+          \"586\",\r\n    \"primaryCustomer\": {\r\n      \"identType\": \"CNIC\",\r\n
+          \     \"identValue\": \"1234512345673\"\r\n    },\r\n    \"secondaryCustomer\":
+          {\r\n      \"identType\": \"CNIC\",\r\n      \"identValue\": \"1234512345674\"\r\n
+          \   }\r\n  },\r\n  \"additionalInfo\": {\r\n    \"accountInfo\": {\r\n      \"trackData\":
+          \"1234512345671\",\r\n      \"trackDataExtended\": \"0000000000000000\"\r\n
+          \   },\r\n    \"merchantInfo\": {\r\n      \"merchantCategoryCode\": \"5399\",\r\n
+          \     \"acquiringInstitutionIdentificationCode\": \"100271\",\r\n      \"forwardingInstitutionIdentificationCode\":
+          \"987654\",\r\n      \"merchantIdCode\": \"ABC123456\",\r\n      \"merchantNameLocation\":
+          \"Test Merchant\"\r\n    },\r\n    \"terminalInfo\": {\r\n      \"terminalId\":
+          \"ATM01\",\r\n      \"additionalTerminalLocation\": \"000000\",\r\n      \"terminalLocation\":
+          \"000000\",\r\n      \"pointOfServiceEntryMode\": \"021\",\r\n      \"pointOfServiceConditionCode\":
+          \"00\"\r\n    },\r\n    \"settlementInfo\": {\r\n      \"settlementDate\":
+          \"121212\",\r\n      \"captureDate\": \"000000\",\r\n      \"currencyCodeTransaction\":
+          \"586\",\r\n      \"currencyCodeSettlement\": \"586\",\r\n      \"currencyCodeCardholderBilling\":
+          \"586\"\r\n    },\r\n    \"securityInfo\": {\r\n      \"securityControlInfo\":
+          \"200000\",\r\n      \"iccData\": \"0987654321\",\r\n      \"securityControlInfoVisaMastercard\":
+          \"000000\"\r\n    },\r\n    \"responseInfo\": {\r\n      \"authorizationIdentificationResponseCode\":
+          \"123456\",\r\n      \"messageAuthenticationCode\": \"2000000000000000\"\r\n
+          \   },\r\n    \"reservedFields\": {\r\n      \"reservedField01\": \"\",\r\n
+          \     \"reservedField02\": \"\",\r\n      \"reservedField03\": \"\",\r\n
+          \     \"reservedField04\": \"\",\r\n      \"reservedField05\": \"\"\r\n
+          \   },\r\n    \"networkInfo\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\"\r\n    },\r\n
+          \   \"transactionInfoExtended\": {\r\n      \"networkInternationalIdentifier\":
+          \"001\",\r\n      \"networkDestinationIdentifier\": \"001\",\r\n      \"acquiringInstitutionId\":
+          \"100271\",\r\n      \"forwardingInstitutionId\": \"987654\"\r\n    }\r\n
+          \ }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Thu, 12 Dec 2024 08:37:02 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "123456123456",
+              "stan": "123456",
+              "transactionDate": "21-11-2024 12:00:00",
+              "channel": "001",
+              "referenceNumber": "0900000000000000000000016",
+              "transaction": [
+                  {
+                      "code": "0030",
+                      "amount": 1000,
+                      "type": "D",
+                      "stan": "123456",
+                      "accountNumber": "0900000000000002",
+                      "postingDate": "22-11-2024 12:00:00",
+                      "narration": "Outgoing IBFT"
+                  },
+                  {
+                      "code": "0033",
+                      "amount": 23.33,
+                      "type": "D",
+                      "stan": "133701",
+                      "accountNumber": "0900000000000002",
+                      "postingDate": "22-11-2024 12:00:00",
+                      "narration": "Service Fee"
+                  },
+                  {
+                      "code": "0034",
+                      "amount": 6.999,
+                      "type": "D",
+                      "stan": "133701",
+                      "accountNumber": "0900000000000002",
+                      "postingDate": "22-11-2024 12:00:00",
+                      "narration": "FED"
+                  },
+                  {
+                      "code": "0031",
+                      "amount": 100,
+                      "type": "D",
+                      "stan": "001",
+                      "accountNumber": "0900000000000002",
+                      "postingDate": "22-11-2024 12:00:00",
+                      "narration": "Fee payment"
+                  },
+                  {
+                      "code": "0032",
+                      "amount": 10,
+                      "type": "D",
+                      "stan": "001",
+                      "accountNumber": "0900000000000002",
+                      "postingDate": "22-11-2024 12:00:00",
+                      "narration": "Tip payment"
+                  }
+              ]
+          }
+      }
+  - name: Outgoing Payment (DEBIT) 2
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2MzIzOTM0LCJleHAiOjE3MzY0MTAzMzR9.oMfiH-d_9bonOf7gFcgDeSrhGV2IRdwUje3ORP5nKIU
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"12-12-2024
+          16:33:41\",\r\n    \"stan\": \"334121\",\r\n    \"rrn\": \"001116114111\",\r\n
+          \   \"transaction\": {\r\n        \"code\": \"0030\",\r\n        \"purposeCode\":
+          \"1001\",\r\n        \"narration\": \"Payment for services\",\r\n        \"amount\":
+          {\r\n            \"currency\": \"PKR\",\r\n            \"value\": 10000\r\n
+          \       },\r\n        \"fee\": {\r\n            \"feeAmount\": 0\r\n        },\r\n
+          \       \"tip\": {\r\n            \"tipAmount\": 0\r\n        }\r\n    },\r\n
+          \   \"fromAccount\": {\r\n        \"accountNumber\": \"03001231234\",\r\n
+          \       \"accountCurrency\": \"586\"\r\n    },\r\n    \"additionalInfo\":
+          {\r\n        \"reservedFields\": {}\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Wed, 08 Jan 2025 08:31:19 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "001116114111",
+              "stan": "334121",
+              "transactionDate": "12-12-2024 16:33:41",
+              "channel": "001",
+              "referenceNumber": "0900000000000000000000271",
+              "authCode": "334121",
+              "transaction": [
+                  {
+                      "code": "0030",
+                      "amount": 10000,
+                      "type": "D",
+                      "stan": "334121",
+                      "accountNumber": "03001231234",
+                      "postingDate": "13-12-2024 16:33:41.000",
+                      "narration": "Outgoing IBFT"
+                  },
+                  {
+                      "code": "0033",
+                      "amount": 10,
+                      "type": "D",
+                      "stan": "311880",
+                      "accountNumber": "03001231234",
+                      "postingDate": "13-12-2024 16:33:41.000",
+                      "narration": "Transaction fee"
+                  },
+                  {
+                      "code": "0034",
+                      "amount": 1.5,
+                      "type": "D",
+                      "stan": "311880",
+                      "accountNumber": "03001231234",
+                      "postingDate": "13-12-2024 16:33:41.000",
+                      "narration": "FED"
+                  }
+              ]
+          }
+      }
+- name: Reversal
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2Nzc2NjMxLCJleHAiOjE3MzY4NjMwMzF9.Xqub5AHsOkHGDY6JKsvS3KB7CEew_bx9Jsb5keqZhI0
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"14-01-2025
+        16:33:41\",\r\n    \"stan\": \"145145\",\r\n    \"rrn\": \"145145145145\",\r\n
+        \   \"orgStan\": \"112112\",\r\n    \"orgRrn\": \"112112112112\",\r\n    \"transaction\":
+        {\r\n        \"code\": \"0030\",\r\n        \"purposeCode\": \"1001\",\r\n
+        \       \"narration\": \"Payment for services\",\r\n        \"amount\": {\r\n
+        \           \"currency\": \"PKR\",\r\n            \"value\": 10000\r\n        },\r\n
+        \       \"fee\": {\r\n            \"feeAmount\": 0\r\n        },\r\n        \"tip\":
+        {\r\n            \"tipAmount\": 0\r\n        }\r\n    },\r\n    \"fromAccount\":
+        {\r\n        \"accountNumber\": \"03001231235\",\r\n        \"accountCurrency\":
+        \"586\"\r\n    },\r\n    \"additionalInfo\": {\r\n        \"reservedFields\":
+        {}\r\n    }\r\n}"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{uat_url}}/payments/executeTrx"
+      host:
+      - "{{uat_url}}"
+      path:
+      - payments
+      - executeTrx
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response: []
+- name: P2P (Incoming)
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2Nzc2NjMxLCJleHAiOjE3MzY4NjMwMzF9.Xqub5AHsOkHGDY6JKsvS3KB7CEew_bx9Jsb5keqZhI0
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n    \"channel\": \"005\",\r\n    \"transactionDate\": \"14-01-2025
+        12:00:00\",\r\n    \"stan\": \"112234\",\r\n    \"rrn\": \"112233112234\",\r\n
+        \   \"systemId\": \"00111223\",\r\n    \"transaction\": {\r\n        \"code\":
+        \"0070\",\r\n        \"purposeCode\": \"0112\",\r\n        \"narration\":
+        \"Test transaction\",\r\n        \"amount\": {\r\n            \"currency\":
+        \"PKR\",\r\n            \"value\": 1000\r\n        }\r\n    },\r\n    \"toAccount\":
+        {\r\n        \"accountNumber\": \"03001231234\",\r\n        \"accountTitle\":
+        \"Hassan Ali\",\r\n        \"accountType\": \"00\"\r\n    },\r\n    \"additionalInfo\":
+        {\r\n        \"reservedFields\": {\r\n            \"reservedField01\": \"\",\r\n
+        \           \"reservedField02\": \"\",\r\n            \"reservedField03\":
+        \"\",\r\n            \"reservedField04\": \"\",\r\n            \"reservedField05\":
+        \"\"\r\n        },\r\n        \"networkInfo\": {\r\n            \"networkInternationalIdentifier\":
+        \"001\",\r\n            \"networkDestinationIdentifier\": \"001\"\r\n        },\r\n
+        \       \"raastInfo\": {\r\n            \"paymentType\": \"P2P\",\r\n            \"endToEndId\":
+        \"E2E1234567890\",\r\n            \"msgId\": \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\":
+        \"1234567890123456\",\r\n            \"beneficiaryMobileNumber\": \"923001234567\",\r\n
+        \           \"transactionId\": \"R123456789\"\r\n        }\r\n    }\r\n}"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{base_url}}/payments/executeTrx"
+      host:
+      - "{{base_url}}"
+      path:
+      - payments
+      - executeTrx
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response:
+  - name: P2P (Incoming)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM1MzAzNDg5LCJleHAiOjE3MzUzODk4ODl9.5pNOMmQ-PhZpM3HhPDyCLvy2kIaZBOhnfPkBDVmtBl8
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"005\",\r\n    \"transactionDate\": \"21-11-2024
+          12:00:00\",\r\n    \"stan\": \"123456\",\r\n    \"rrn\": \"123456223356\",\r\n
+          \   \"transaction\": {\r\n        \"code\": \"0070\",\r\n        \"purposeCode\":
+          \"0112\",\r\n        \"narration\": \"Test transaction\",\r\n        \"amount\":
+          {\r\n            \"currency\": \"PKR\",\r\n            \"value\": 1000\r\n
+          \       }\r\n    },\r\n    \"fromAccount\": {\r\n        \"accountNumber\":
+          \"05421236547552\",\r\n        \"accountTitle\": \"Muhammad Ali & Hassan
+          Ali\",\r\n        \"accountType\": \"00\",\r\n        \"accountCurrency\":
+          \"586\",\r\n        \"primaryCustomer\": {\r\n            \"identType\":
+          \"CNIC\",\r\n            \"identValue\": \"1234512345671\"\r\n        },\r\n
+          \       \"secondaryCustomer\": {\r\n            \"identType\": \"CNIC\",\r\n
+          \           \"identValue\": \"1234512345672\"\r\n        }\r\n    },\r\n
+          \   \"toAccount\": {\r\n        \"accountNumber\": \"0900000000000005\",\r\n
+          \       \"accountTitle\": \"Hassan Ali\",\r\n        \"accountType\": \"00\",\r\n
+          \       \"accountCurrency\": \"586\",\r\n        \"primaryCustomer\": {\r\n
+          \           \"identType\": \"CNIC\",\r\n            \"identValue\": \"1234512345673\"\r\n
+          \       },\r\n        \"secondaryCustomer\": {\r\n            \"identType\":
+          \"CNIC\",\r\n            \"identValue\": \"1234512345674\"\r\n        }\r\n
+          \   },\r\n    \"additionalInfo\": {\r\n        \"accountInfo\": {\r\n            \"trackData\":
+          \"1234512345671\",\r\n            \"trackDataExtended\": \"0000000000000000\"\r\n
+          \       },\r\n        \"merchantInfo\": {\r\n            \"merchantCategoryCode\":
+          \"5399\",\r\n            \"acquiringInstitutionIdentificationCode\": \"100271\",\r\n
+          \           \"forwardingInstitutionIdentificationCode\": \"987654\",\r\n
+          \           \"merchantIdCode\": \"ABC123456\",\r\n            \"merchantNameLocation\":
+          \"Test Merchant\"\r\n        },\r\n        \"terminalInfo\": {\r\n            \"terminalId\":
+          \"ATM01\",\r\n            \"additionalTerminalLocation\": \"000000\",\r\n
+          \           \"terminalLocation\": \"000000\",\r\n            \"pointOfServiceEntryMode\":
+          \"021\",\r\n            \"pointOfServiceConditionCode\": \"00\"\r\n        },\r\n
+          \       \"settlementInfo\": {\r\n            \"settlementDate\": \"121212\",\r\n
+          \           \"captureDate\": \"000000\",\r\n            \"currencyCodeTransaction\":
+          \"586\",\r\n            \"currencyCodeSettlement\": \"586\",\r\n            \"currencyCodeCardholderBilling\":
+          \"586\"\r\n        },\r\n        \"securityInfo\": {\r\n            \"securityControlInfo\":
+          \"200000\",\r\n            \"iccData\": \"0987654321\",\r\n            \"securityControlInfoVisaMastercard\":
+          \"000000\"\r\n        },\r\n        \"responseInfo\": {\r\n            \"authorizationIdentificationResponseCode\":
+          \"123456\",\r\n            \"messageAuthenticationCode\": \"2000000000000000\"\r\n
+          \       },\r\n        \"reservedFields\": {\r\n            \"reservedField01\":
+          \"\",\r\n            \"reservedField02\": \"\",\r\n            \"reservedField03\":
+          \"\",\r\n            \"reservedField04\": \"\",\r\n            \"reservedField05\":
+          \"\"\r\n        },\r\n        \"networkInfo\": {\r\n            \"networkInternationalIdentifier\":
+          \"001\",\r\n            \"networkDestinationIdentifier\": \"001\"\r\n        },\r\n
+          \       \"transactionInfoExtended\": {\r\n            \"networkInternationalIdentifier\":
+          \"001\",\r\n            \"networkDestinationIdentifier\": \"001\",\r\n            \"acquiringInstitutionId\":
+          \"100271\",\r\n            \"forwardingInstitutionId\": \"987654\"\r\n        },\r\n
+          \       \"raastInfo\": {\r\n            \"paymentType\": \"P2P\",\r\n            \"endToEndId\":
+          \"E2E1234567890\",\r\n            \"msgId\": \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\":
+          \"1234567890123456\",\r\n            \"beneficiaryMobileNumber\": \"923001234567\",\r\n
+          \           \"transactionId\": \"R123456789\"\r\n        }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Fri, 27 Dec 2024 19:04:42 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "123456223356",
+              "stan": "123456",
+              "transactionDate": "21-11-2024 12:00:00",
+              "channel": "005",
+              "referenceNumber": "0900000000000000000000214",
+              "authCode": "123456",
+              "transaction": [
+                  {
+                      "code": "0070",
+                      "amount": 1000,
+                      "type": "C",
+                      "stan": "123456",
+                      "accountNumber": "0900000000000005",
+                      "postingDate": "22-11-2024 12:00:00.000",
+                      "narration": "P2P Credit"
+                  }
+              ]
+          }
+      }
+  - name: P2P (Incoming) 2
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2Nzc2NjMxLCJleHAiOjE3MzY4NjMwMzF9.Xqub5AHsOkHGDY6JKsvS3KB7CEew_bx9Jsb5keqZhI0
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"005\",\r\n    \"transactionDate\": \"14-01-2025
+          12:00:00\",\r\n    \"stan\": \"112233\",\r\n    \"rrn\": \"112233112233\",\r\n
+          \   \"systemId\": \"00111223\",\r\n    \"transaction\": {\r\n        \"code\":
+          \"0070\",\r\n        \"purposeCode\": \"0112\",\r\n        \"narration\":
+          \"Test transaction\",\r\n        \"amount\": {\r\n            \"currency\":
+          \"PKR\",\r\n            \"value\": 1000\r\n        }\r\n    },\r\n    \"toAccount\":
+          {\r\n        \"accountNumber\": \"03001231235\",\r\n        \"accountTitle\":
+          \"Hassan Ali\",\r\n        \"accountType\": \"00\"\r\n    },\r\n    \"additionalInfo\":
+          {\r\n        \"reservedFields\": {\r\n            \"reservedField01\": \"\",\r\n
+          \           \"reservedField02\": \"\",\r\n            \"reservedField03\":
+          \"\",\r\n            \"reservedField04\": \"\",\r\n            \"reservedField05\":
+          \"\"\r\n        },\r\n        \"networkInfo\": {\r\n            \"networkInternationalIdentifier\":
+          \"001\",\r\n            \"networkDestinationIdentifier\": \"001\"\r\n        },\r\n
+          \       \"raastInfo\": {\r\n            \"paymentType\": \"P2P\",\r\n            \"endToEndId\":
+          \"E2E1234567890\",\r\n            \"msgId\": \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\":
+          \"1234567890123456\",\r\n            \"beneficiaryMobileNumber\": \"923001234567\",\r\n
+          \           \"transactionId\": \"R123456789\"\r\n        }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Mon, 13 Jan 2025 19:18:31 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "112233112233",
+              "stan": "112233",
+              "transactionDate": "14-01-2025 12:00:00",
+              "channel": "005",
+              "referenceNumber": "0900000000000000000000378",
+              "authCode": "112233",
+              "transaction": [
+                  {
+                      "code": "0070",
+                      "amount": 1000,
+                      "type": "C",
+                      "stan": "112233",
+                      "productCode": "0010",
+                      "accountNumber": "03001231235",
+                      "postingDate": "15-01-2025 00:18:25.449",
+                      "narration": "P2P Credit"
+                  }
+              ]
+          }
+      }
+- name: Credit Inquiry
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2Nzc2NjMxLCJleHAiOjE3MzY4NjMwMzF9.Xqub5AHsOkHGDY6JKsvS3KB7CEew_bx9Jsb5keqZhI0
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n    \"channel\": \"005\",\r\n    \"transactionDate\": \"14-01-2025
+        12:00:00\",\r\n    \"orgStan\": \"112234\",\r\n    \"orgRrn\": \"112233112234\",\r\n
+        \   \"stan\": \"111223\",\r\n    \"rrn\": \"111222111223\",\r\n    \"systemId\":
+        \"00111223\",\r\n    \"transaction\": {\r\n        \"code\": \"0070\",\r\n
+        \       \"purposeCode\": \"0112\",\r\n        \"narration\": \"Test transaction\",\r\n
+        \       \"amount\": {\r\n            \"currency\": \"PKR\",\r\n            \"value\":
+        1000\r\n        }\r\n    },\r\n    \"toAccount\": {\r\n        \"accountNumber\":
+        \"03001231235\",\r\n        \"accountTitle\": \"Hassan Ali\",\r\n        \"accountType\":
+        \"00\"\r\n    },\r\n    \"additionalInfo\": {\r\n        \"reservedFields\":
+        {\r\n            \"reservedField01\": \"\",\r\n            \"reservedField02\":
+        \"\",\r\n            \"reservedField03\": \"\",\r\n            \"reservedField04\":
+        \"\",\r\n            \"reservedField05\": \"\"\r\n        },\r\n        \"networkInfo\":
+        {\r\n            \"networkInternationalIdentifier\": \"001\",\r\n            \"networkDestinationIdentifier\":
+        \"001\"\r\n        },\r\n        \"raastInfo\": {\r\n            \"paymentType\":
+        \"P2P\",\r\n            \"endToEndId\": \"E2E1234567890\",\r\n            \"msgId\":
+        \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\": \"1234567890123456\",\r\n
+        \           \"beneficiaryMobileNumber\": \"923001234567\",\r\n            \"transactionId\":
+        \"R123456789\"\r\n        }\r\n    }\r\n}"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{base_url}}/payments/creditInquiry"
+      host:
+      - "{{base_url}}"
+      path:
+      - payments
+      - creditInquiry
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response:
+  - name: Credit Inquiry (SUCCESS)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2Nzc2NjMxLCJleHAiOjE3MzY4NjMwMzF9.Xqub5AHsOkHGDY6JKsvS3KB7CEew_bx9Jsb5keqZhI0
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"005\",\r\n    \"transactionDate\": \"14-01-2025
+          12:00:00\",\r\n    \"orgStan\": \"112233\",\r\n    \"orgRrn\": \"112233112233\",\r\n
+          \   \"stan\": \"111222\",\r\n    \"rrn\": \"111222111222\",\r\n    \"systemId\":
+          \"00111223\",\r\n    \"transaction\": {\r\n        \"code\": \"0070\",\r\n
+          \       \"purposeCode\": \"0112\",\r\n        \"narration\": \"Test transaction\",\r\n
+          \       \"amount\": {\r\n            \"currency\": \"PKR\",\r\n            \"value\":
+          1000\r\n        }\r\n    },\r\n    \"toAccount\": {\r\n        \"accountNumber\":
+          \"03001231235\",\r\n        \"accountTitle\": \"Hassan Ali\",\r\n        \"accountType\":
+          \"00\"\r\n    },\r\n    \"additionalInfo\": {\r\n        \"reservedFields\":
+          {\r\n            \"reservedField01\": \"\",\r\n            \"reservedField02\":
+          \"\",\r\n            \"reservedField03\": \"\",\r\n            \"reservedField04\":
+          \"\",\r\n            \"reservedField05\": \"\"\r\n        },\r\n        \"networkInfo\":
+          {\r\n            \"networkInternationalIdentifier\": \"001\",\r\n            \"networkDestinationIdentifier\":
+          \"001\"\r\n        },\r\n        \"raastInfo\": {\r\n            \"paymentType\":
+          \"P2P\",\r\n            \"endToEndId\": \"E2E1234567890\",\r\n            \"msgId\":
+          \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\": \"1234567890123456\",\r\n
+          \           \"beneficiaryMobileNumber\": \"923001234567\",\r\n            \"transactionId\":
+          \"R123456789\"\r\n        }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/creditInquiry"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - creditInquiry
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Mon, 13 Jan 2025 19:20:04 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "responseCode": "00",
+              "responseDesc": "SUCCESS",
+              "data": {
+                  "rrn": "112233112233",
+                  "stan": "112233",
+                  "transactionDate": "14-01-2025 12:00:00",
+                  "channel": "005",
+                  "referenceNumber": "0900000000000000000000378",
+                  "authCode": "112233",
+                  "transaction": [
+                      {
+                          "code": "0070",
+                          "amount": 1000,
+                          "type": "C",
+                          "stan": "112233",
+                          "productCode": "0010",
+                          "accountNumber": "03001231235",
+                          "postingDate": "15-01-2025 00:18:25.449",
+                          "narration": "P2P Credit"
+                      }
+                  ]
+              }
+          }
+      }
+  - name: Credit Inquiry (in process)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2Nzc2NjMxLCJleHAiOjE3MzY4NjMwMzF9.Xqub5AHsOkHGDY6JKsvS3KB7CEew_bx9Jsb5keqZhI0
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"005\",\r\n    \"transactionDate\": \"14-01-2025
+          12:00:00\",\r\n    \"orgStan\": \"112233\",\r\n    \"orgRrn\": \"112233112233\",\r\n
+          \   \"stan\": \"111222\",\r\n    \"rrn\": \"111222111222\",\r\n    \"systemId\":
+          \"00111223\",\r\n    \"transaction\": {\r\n        \"code\": \"0070\",\r\n
+          \       \"purposeCode\": \"0112\",\r\n        \"narration\": \"Test transaction\",\r\n
+          \       \"amount\": {\r\n            \"currency\": \"PKR\",\r\n            \"value\":
+          1000\r\n        }\r\n    },\r\n    \"toAccount\": {\r\n        \"accountNumber\":
+          \"03001231235\",\r\n        \"accountTitle\": \"Hassan Ali\",\r\n        \"accountType\":
+          \"00\"\r\n    },\r\n    \"additionalInfo\": {\r\n        \"reservedFields\":
+          {\r\n            \"reservedField01\": \"\",\r\n            \"reservedField02\":
+          \"\",\r\n            \"reservedField03\": \"\",\r\n            \"reservedField04\":
+          \"\",\r\n            \"reservedField05\": \"\"\r\n        },\r\n        \"networkInfo\":
+          {\r\n            \"networkInternationalIdentifier\": \"001\",\r\n            \"networkDestinationIdentifier\":
+          \"001\"\r\n        },\r\n        \"raastInfo\": {\r\n            \"paymentType\":
+          \"P2P\",\r\n            \"endToEndId\": \"E2E1234567890\",\r\n            \"msgId\":
+          \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\": \"1234567890123456\",\r\n
+          \           \"beneficiaryMobileNumber\": \"923001234567\",\r\n            \"transactionId\":
+          \"R123456789\"\r\n        }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/creditInquiry"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - creditInquiry
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Mon, 13 Jan 2025 19:20:33 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "07",
+          "responseDesc": "Transaction in process",
+          "data": null
+      }
+  - name: Credit Inquiry (failure)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2Nzc2NjMxLCJleHAiOjE3MzY4NjMwMzF9.Xqub5AHsOkHGDY6JKsvS3KB7CEew_bx9Jsb5keqZhI0
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"005\",\r\n    \"transactionDate\": \"14-01-2025
+          12:00:00\",\r\n    \"orgStan\": \"112234\",\r\n    \"orgRrn\": \"112233112234\",\r\n
+          \   \"stan\": \"111223\",\r\n    \"rrn\": \"111222111223\",\r\n    \"systemId\":
+          \"00111223\",\r\n    \"transaction\": {\r\n        \"code\": \"0070\",\r\n
+          \       \"purposeCode\": \"0112\",\r\n        \"narration\": \"Test transaction\",\r\n
+          \       \"amount\": {\r\n            \"currency\": \"PKR\",\r\n            \"value\":
+          1000\r\n        }\r\n    },\r\n    \"toAccount\": {\r\n        \"accountNumber\":
+          \"03001231235\",\r\n        \"accountTitle\": \"Hassan Ali\",\r\n        \"accountType\":
+          \"00\"\r\n    },\r\n    \"additionalInfo\": {\r\n        \"reservedFields\":
+          {\r\n            \"reservedField01\": \"\",\r\n            \"reservedField02\":
+          \"\",\r\n            \"reservedField03\": \"\",\r\n            \"reservedField04\":
+          \"\",\r\n            \"reservedField05\": \"\"\r\n        },\r\n        \"networkInfo\":
+          {\r\n            \"networkInternationalIdentifier\": \"001\",\r\n            \"networkDestinationIdentifier\":
+          \"001\"\r\n        },\r\n        \"raastInfo\": {\r\n            \"paymentType\":
+          \"P2P\",\r\n            \"endToEndId\": \"E2E1234567890\",\r\n            \"msgId\":
+          \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\": \"1234567890123456\",\r\n
+          \           \"beneficiaryMobileNumber\": \"923001234567\",\r\n            \"transactionId\":
+          \"R123456789\"\r\n        }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/creditInquiry"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - creditInquiry
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Mon, 13 Jan 2025 19:22:23 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "responseCode": "22",
+              "responseDesc": "Account is Inactive"
+          }
+      }
+- name: P2P (Outgoing)
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM1MzAzNDg5LCJleHAiOjE3MzUzODk4ODl9.5pNOMmQ-PhZpM3HhPDyCLvy2kIaZBOhnfPkBDVmtBl8
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"12-12-2024
+        16:33:41\",\r\n    \"stan\": \"334111\",\r\n    \"rrn\": \"001246334111\",\r\n
+        \   \"transaction\": {\r\n        \"code\": \"0080\",\r\n        \"purposeCode\":
+        \"1001\",\r\n        \"narration\": \"Payment for services\",\r\n        \"amount\":
+        {\r\n            \"currency\": \"PKR\",\r\n            \"value\": 100\r\n
+        \       }\r\n    },\r\n    \"fromAccount\": {\r\n        \"accountNumber\":
+        \"0900000000000005\",\r\n        \"accountCurrency\": \"586\"\r\n    },\r\n
+        \   \"additionalInfo\": {\r\n        \"raastInfo\": {\r\n            \"paymentType\":
+        \"P2P\",\r\n            \"endToEndId\": \"E2E1234567890\",\r\n            \"msgId\":
+        \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\": \"1234567890123456\",\r\n
+        \           \"beneficiaryMobileNumber\": \"923001234567\",\r\n            \"transactionId\":
+        \"R123456789\"\r\n        }\r\n    }\r\n}"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{uat_url}}/payments/executeTrx"
+      host:
+      - "{{uat_url}}"
+      path:
+      - payments
+      - executeTrx
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response:
+  - name: P2P (Outgoing)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM1MzAzNDg5LCJleHAiOjE3MzUzODk4ODl9.5pNOMmQ-PhZpM3HhPDyCLvy2kIaZBOhnfPkBDVmtBl8
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"12-12-2024
+          16:33:41\",\r\n    \"stan\": \"334111\",\r\n    \"rrn\": \"001216334111\",\r\n
+          \   \"transaction\": {\r\n        \"code\": \"0080\",\r\n        \"purposeCode\":
+          \"1001\",\r\n        \"narration\": \"Payment for services\",\r\n        \"amount\":
+          {\r\n            \"currency\": \"PKR\",\r\n            \"value\": 100\r\n
+          \       }\r\n    },\r\n    \"fromAccount\": {\r\n        \"accountNumber\":
+          \"0900000000000005\",\r\n        \"accountCurrency\": \"586\"\r\n    },\r\n
+          \   \"toAccount\": {\r\n        \"accountNumber\": \"0900000000000008\",\r\n
+          \       \"accountCurrency\": \"586\"\r\n    },\r\n    \"additionalInfo\":
+          {\r\n        \"raastInfo\": {\r\n            \"paymentType\": \"P2P\",\r\n
+          \           \"endToEndId\": \"E2E1234567890\",\r\n            \"msgId\":
+          \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\": \"1234567890123456\",\r\n
+          \           \"beneficiaryMobileNumber\": \"923001234567\",\r\n            \"transactionId\":
+          \"R123456789\"\r\n        }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Fri, 27 Dec 2024 19:03:56 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "001216334111",
+              "stan": "334111",
+              "transactionDate": "12-12-2024 16:33:41",
+              "channel": "001",
+              "referenceNumber": "0900000000000000000000213",
+              "authCode": "334111",
+              "transaction": [
+                  {
+                      "code": "0080",
+                      "amount": 100,
+                      "type": "D",
+                      "stan": "334111",
+                      "accountNumber": "0900000000000005",
+                      "postingDate": "13-12-2024 16:33:41.000",
+                      "narration": "P2P Debit"
+                  }
+              ]
+          }
+      }
+  - name: P2P (Outgoing) 2
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2MzIzOTM0LCJleHAiOjE3MzY0MTAzMzR9.oMfiH-d_9bonOf7gFcgDeSrhGV2IRdwUje3ORP5nKIU
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"12-12-2024
+          16:33:41\",\r\n    \"stan\": \"334111\",\r\n    \"rrn\": \"001246334111\",\r\n
+          \   \"transaction\": {\r\n        \"code\": \"0080\",\r\n        \"purposeCode\":
+          \"1001\",\r\n        \"narration\": \"Payment for services\",\r\n        \"amount\":
+          {\r\n            \"currency\": \"PKR\",\r\n            \"value\": 100\r\n
+          \       }\r\n    },\r\n    \"fromAccount\": {\r\n        \"accountNumber\":
+          \"03001231234\",\r\n        \"accountCurrency\": \"586\"\r\n    },\r\n    \"additionalInfo\":
+          {\r\n        \"raastInfo\": {\r\n            \"paymentType\": \"P2P\",\r\n
+          \           \"endToEndId\": \"E2E1234567890\",\r\n            \"msgId\":
+          \"MSG1234567890\",\r\n            \"beneficiaryAccountNumber\": \"1234567890123456\",\r\n
+          \           \"beneficiaryMobileNumber\": \"923001234567\",\r\n            \"transactionId\":
+          \"R123456789\"\r\n        }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Wed, 08 Jan 2025 08:50:10 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "001246334111",
+              "stan": "334111",
+              "transactionDate": "12-12-2024 16:33:41",
+              "channel": "001",
+              "referenceNumber": "0900000000000000000000272",
+              "authCode": "334111",
+              "transaction": [
+                  {
+                      "code": "0080",
+                      "amount": 100,
+                      "type": "D",
+                      "stan": "334111",
+                      "accountNumber": "03001231234",
+                      "postingDate": "13-12-2024 16:33:41.000",
+                      "narration": "P2P Debit"
+                  }
+              ]
+          }
+      }
+- name: Card payments
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM0OTM2NjkzLCJleHAiOjE3MzUwMjMwOTN9.CUx9ag5cMVPlBdBv1pinUtmMhyZqjWdj3l-YXPe8KzA
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n    \"channel\": \"003\",\r\n    \"transactionDate\": \"12-12-2024
+        16:33:41\",\r\n    \"stan\": \"334111\",\r\n    \"rrn\": \"001116334111\",\r\n
+        \   \"transaction\": {\r\n        \"code\": \"0060\",\r\n        \"purposeCode\":
+        \"1001\",\r\n        \"narration\": \"Payment for services\",\r\n        \"amount\":
+        {\r\n            \"currency\": \"PKR\",\r\n            \"value\": 100\r\n
+        \       },\r\n        \"fee\": {\r\n            \"feeAmount\": 0\r\n        },\r\n
+        \       \"tip\": {\r\n            \"tipAmount\": 10\r\n        }\r\n    },\r\n
+        \   \"fromAccount\": {\r\n        \"accountNumber\": \"0900000000000006\",\r\n
+        \       \"accountCurrency\": \"586\"\r\n    },\r\n    \"additionalInfo\":
+        {\r\n        \"reservedFields\": {},\r\n        \"cardInfo\": {\r\n            \"pan\":
+        \"4111111111111111\",\r\n            \"cardExpiry\": \"12/26\",\r\n            \"panSeqNumber\":
+        \"001\",\r\n            \"cardAcceptorCode\": \"100271\",\r\n            \"paymentScheme\":
+        \"001\"\r\n        },\r\n        \"supportingInfo\": {\r\n            \"additionalDataNational\":
+        \"NationalDataExample\",\r\n            \"additionalData\": \"AdditionalDataExample\",\r\n
+        \           \"additionalAmounts\": \"AdditionalAmountsExample\",\r\n            \"additionalEmvInformation\":
+        \"EMVInfoExample\",\r\n            \"cardAuthInformation\": \"AuthInfoExample\",\r\n
+        \           \"originalDataElement\": \"OriginalDataExample\",\r\n            \"reservedNational6\":
+        \"ReservedDataExample6\",\r\n            \"reservedNational7\": \"ReservedDataExample7\",\r\n
+        \           \"reservedNational8\": \"ReservedDataExample8\",\r\n            \"recordData\":
+        \"RecordDataExample\",\r\n            \"supportingInformation\": \"SupportingInfoExample\"\r\n
+        \       }\r\n    }\r\n}"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{uat_url}}/payments/executeTrx"
+      host:
+      - "{{uat_url}}"
+      path:
+      - payments
+      - executeTrx
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response:
+  - name: Card payments (ATM)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM0OTM2NjkzLCJleHAiOjE3MzUwMjMwOTN9.CUx9ag5cMVPlBdBv1pinUtmMhyZqjWdj3l-YXPe8KzA
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"002\",\r\n    \"transactionDate\": \"12-12-2024
+          16:33:41\",\r\n    \"stan\": \"334111\",\r\n    \"rrn\": \"001216334111\",\r\n
+          \   \"transaction\": {\r\n        \"code\": \"0060\",\r\n        \"purposeCode\":
+          \"1001\",\r\n        \"narration\": \"Payment for services\",\r\n        \"amount\":
+          {\r\n            \"currency\": \"PKR\",\r\n            \"value\": 100\r\n
+          \       },\r\n        \"fee\": {\r\n            \"feeAmount\": 0\r\n        },\r\n
+          \       \"tip\": {\r\n            \"tipAmount\": 0\r\n        }\r\n    },\r\n
+          \   \"fromAccount\": {\r\n        \"accountNumber\": \"0900000000000006\",\r\n
+          \       \"accountCurrency\": \"586\"\r\n    },\r\n    \"additionalInfo\":
+          {\r\n        \"reservedFields\": {},\r\n        \"cardInfo\": {\r\n            \"pan\":
+          \"4111111111111111\",\r\n            \"cardExpiry\": \"12/26\",\r\n            \"panSeqNumber\":
+          \"001\",\r\n            \"cardAcceptorCode\": \"100271\",\r\n            \"paymentScheme\":
+          \"001\"\r\n        },\r\n        \"supportingInfo\": {\r\n            \"additionalDataNational\":
+          \"NationalDataExample\",\r\n            \"additionalData\": \"AdditionalDataExample\",\r\n
+          \           \"additionalAmounts\": \"AdditionalAmountsExample\",\r\n            \"additionalEmvInformation\":
+          \"EMVInfoExample\",\r\n            \"cardAuthInformation\": \"AuthInfoExample\",\r\n
+          \           \"originalDataElement\": \"OriginalDataExample\",\r\n            \"reservedNational6\":
+          \"ReservedDataExample6\",\r\n            \"reservedNational7\": \"ReservedDataExample7\",\r\n
+          \           \"reservedNational8\": \"ReservedDataExample8\",\r\n            \"recordData\":
+          \"RecordDataExample\",\r\n            \"supportingInformation\": \"SupportingInfoExample\"\r\n
+          \       }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Mon, 23 Dec 2024 16:07:07 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "001216334111",
+              "stan": "334111",
+              "transactionDate": "12-12-2024 16:33:41",
+              "channel": "002",
+              "referenceNumber": "0900000000000000000000189",
+              "authCode": "334111",
+              "transaction": [
+                  {
+                      "code": "0060",
+                      "amount": 100,
+                      "type": "D",
+                      "stan": "334111",
+                      "accountNumber": "0900000000000006",
+                      "postingDate": "13-12-2024 16:33:41.041",
+                      "narration": "Withdrawal"
+                  }
+              ]
+          }
+      }
+  - name: Card payments (POS)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM0OTM2NjkzLCJleHAiOjE3MzUwMjMwOTN9.CUx9ag5cMVPlBdBv1pinUtmMhyZqjWdj3l-YXPe8KzA
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"003\",\r\n    \"transactionDate\": \"12-12-2024
+          16:33:41\",\r\n    \"stan\": \"334111\",\r\n    \"rrn\": \"001116334111\",\r\n
+          \   \"transaction\": {\r\n        \"code\": \"0060\",\r\n        \"purposeCode\":
+          \"1001\",\r\n        \"narration\": \"Payment for services\",\r\n        \"amount\":
+          {\r\n            \"currency\": \"PKR\",\r\n            \"value\": 100\r\n
+          \       },\r\n        \"fee\": {\r\n            \"feeAmount\": 0\r\n        },\r\n
+          \       \"tip\": {\r\n            \"tipAmount\": 10\r\n        }\r\n    },\r\n
+          \   \"fromAccount\": {\r\n        \"accountNumber\": \"0900000000000006\",\r\n
+          \       \"accountCurrency\": \"586\"\r\n    },\r\n    \"additionalInfo\":
+          {\r\n        \"reservedFields\": {},\r\n        \"cardInfo\": {\r\n            \"pan\":
+          \"4111111111111111\",\r\n            \"cardExpiry\": \"12/26\",\r\n            \"panSeqNumber\":
+          \"001\",\r\n            \"cardAcceptorCode\": \"100271\",\r\n            \"paymentScheme\":
+          \"001\"\r\n        },\r\n        \"supportingInfo\": {\r\n            \"additionalDataNational\":
+          \"NationalDataExample\",\r\n            \"additionalData\": \"AdditionalDataExample\",\r\n
+          \           \"additionalAmounts\": \"AdditionalAmountsExample\",\r\n            \"additionalEmvInformation\":
+          \"EMVInfoExample\",\r\n            \"cardAuthInformation\": \"AuthInfoExample\",\r\n
+          \           \"originalDataElement\": \"OriginalDataExample\",\r\n            \"reservedNational6\":
+          \"ReservedDataExample6\",\r\n            \"reservedNational7\": \"ReservedDataExample7\",\r\n
+          \           \"reservedNational8\": \"ReservedDataExample8\",\r\n            \"recordData\":
+          \"RecordDataExample\",\r\n            \"supportingInformation\": \"SupportingInfoExample\"\r\n
+          \       }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Mon, 23 Dec 2024 16:09:32 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "001116334111",
+              "stan": "334111",
+              "transactionDate": "12-12-2024 16:33:41",
+              "channel": "003",
+              "referenceNumber": "0900000000000000000000190",
+              "authCode": "334111",
+              "transaction": [
+                  {
+                      "code": "0060",
+                      "amount": 100,
+                      "type": "D",
+                      "stan": "334111",
+                      "accountNumber": "0900000000000006",
+                      "postingDate": "13-12-2024 16:33:41.041",
+                      "narration": "Withdrawal"
+                  },
+                  {
+                      "code": "0032",
+                      "amount": 10,
+                      "type": "D",
+                      "stan": "093175",
+                      "accountNumber": "0900000000000006",
+                      "postingDate": "13-12-2024 16:33:41.041",
+                      "narration": "Tip payment"
+                  }
+              ]
+          }
+      }
+- name: Bill Payment
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM0OTM2NjkzLCJleHAiOjE3MzUwMjMwOTN9.CUx9ag5cMVPlBdBv1pinUtmMhyZqjWdj3l-YXPe8KzA
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n  \"channel\": \"001\",\r\n  \"transactionDate\": \"21-11-2024 12:00:00\",\r\n
+        \ \"stan\": \"123456\",\r\n  \"rrn\": \"123446121456\",\r\n  \"systemId\":
+        \"00111223\",\r\n  \"transaction\": {\r\n    \"code\": \"0050\",\r\n    \"purposeCode\":
+        \"0112\",\r\n    \"narration\": \"Test transaction\",\r\n    \"amount\": {\r\n
+        \     \"currency\": \"PKR\",\r\n      \"value\": 1000\r\n    }\r\n  },\r\n
+        \ \"fromAccount\": {\r\n    \"accountNumber\": \"0900000000000002\",\r\n    \"accountTitle\":
+        \"Muhammad Ali & Hassan Ali\",\r\n    \"accountType\": \"00\",\r\n    \"accountCurrency\":
+        \"586\"\r\n  },\r\n  \"additionalInfo\": {\r\n    \"merchantInfo\": {},\r\n
+        \   \"terminalInfo\": {\r\n      \"terminalId\": \"ATM01\",\r\n      \"additionalTerminalLocation\":
+        \"000000\",\r\n      \"terminalLocation\": \"000000\",\r\n      \"pointOfServiceEntryMode\":
+        \"021\",\r\n      \"pointOfServiceConditionCode\": \"00\",\r\n      \"posPINCaptureCode\":
+        \"00\",\r\n      \"receiptGenerated\": \"00\"\r\n    },\r\n    \"reservedFields\":
+        {\r\n      \"reservedField01\": \"\",\r\n      \"reservedField02\": \"\",\r\n
+        \     \"reservedField03\": \"\",\r\n      \"reservedField04\": \"\",\r\n      \"reservedField05\":
+        \"\"\r\n    },\r\n    \"billInfo\": {\r\n      \"clientID\": \"HBLPAK\",\r\n
+        \     \"channelID\": \"00000003\",\r\n      \"stan\": \"654321\",\r\n      \"companyCode\":
+        \"SSGC0001\",\r\n      \"consumerNo\": \"123456789012345678901234\",\r\n      \"authID\":
+        \"987654\",\r\n      \"responseDetail\": \"Transaction approved successfully.\",\r\n
+        \     \"reserved01\": \"Additional supporting info 1\",\r\n      \"reserved02\":
+        \"Additional supporting info 1\",\r\n      \"billInquiryDetails\": {\r\n        \"payeeCNIC\":
+        \"1234512345671\",\r\n        \"city\": \"Karachi\",\r\n        \"province\":
+        \"Sindh\",\r\n        \"accountId\": \"05421236547552\",\r\n        \"fromAccountType\":
+        \"00\",\r\n        \"fromAccountTitle\": \"Muhammad Ali & Hassan Ali\",\r\n
+        \       \"bundleId\": \"BUNDLE123456\",\r\n        \"bundleQuantity\": \"10\",\r\n
+        \       \"billStatus\": \"U\",\r\n        \"billingMonth\": \"2411\",\r\n
+        \       \"branchCode\": \"0421\",\r\n        \"branchName\": \"Test\",\r\n
+        \       \"dueDate\": \"241121\",\r\n        \"amountWithinDueDate\": \"+0000000050000\",\r\n
+        \       \"amountAfterDueDate\": \"-0000000085050\",\r\n        \"totalLoanAmount\":
+        \"000000500000\",\r\n        \"totalOutstandingAmount\": \"000000200000\",\r\n
+        \       \"feeAmount\": \"000000001500\",\r\n        \"maxLimit\": \"000000100000\",\r\n
+        \       \"minLimit\": \"000000010000\",\r\n        \"supportingInfo1\": \"Additional
+        supporting info 1\",\r\n        \"supportingInfo2\": \"Additional supporting
+        info 2\"\r\n      }\r\n    }\r\n  }\r\n}\r\n"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{uat_url}}/payments/executeTrx"
+      host:
+      - "{{uat_url}}"
+      path:
+      - payments
+      - executeTrx
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response:
+  - name: Bill Payment
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM0OTM2NjkzLCJleHAiOjE3MzUwMjMwOTN9.CUx9ag5cMVPlBdBv1pinUtmMhyZqjWdj3l-YXPe8KzA
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n  \"channel\": \"001\",\r\n  \"transactionDate\": \"21-11-2024
+          12:00:00\",\r\n  \"stan\": \"123456\",\r\n  \"rrn\": \"123446121456\",\r\n
+          \ \"systemId\": \"00111223\",\r\n  \"transaction\": {\r\n    \"code\": \"0050\",\r\n
+          \   \"purposeCode\": \"0112\",\r\n    \"narration\": \"Test transaction\",\r\n
+          \   \"amount\": {\r\n      \"currency\": \"PKR\",\r\n      \"value\": 1000\r\n
+          \   }\r\n  },\r\n  \"fromAccount\": {\r\n    \"accountNumber\": \"0900000000000005\",\r\n
+          \   \"accountTitle\": \"Muhammad Ali & Hassan Ali\",\r\n    \"accountType\":
+          \"00\",\r\n    \"accountCurrency\": \"586\"\r\n  },\r\n  \"additionalInfo\":
+          {\r\n    \"merchantInfo\": {},\r\n    \"terminalInfo\": {\r\n      \"terminalId\":
+          \"ATM01\",\r\n      \"additionalTerminalLocation\": \"000000\",\r\n      \"terminalLocation\":
+          \"000000\",\r\n      \"pointOfServiceEntryMode\": \"021\",\r\n      \"pointOfServiceConditionCode\":
+          \"00\",\r\n      \"posPINCaptureCode\": \"00\",\r\n      \"receiptGenerated\":
+          \"00\"\r\n    },\r\n    \"reservedFields\": {\r\n      \"reservedField01\":
+          \"\",\r\n      \"reservedField02\": \"\",\r\n      \"reservedField03\":
+          \"\",\r\n      \"reservedField04\": \"\",\r\n      \"reservedField05\":
+          \"\"\r\n    },\r\n    \"billInfo\": {\r\n      \"clientID\": \"HBLPAK\",\r\n
+          \     \"channelID\": \"00000003\",\r\n      \"stan\": \"654321\",\r\n      \"companyCode\":
+          \"SSGC0001\",\r\n      \"consumerNo\": \"123456789012345678901234\",\r\n
+          \     \"authID\": \"987654\",\r\n      \"responseDetail\": \"Transaction
+          approved successfully.\",\r\n      \"reserved01\": \"Additional supporting
+          info 1\",\r\n      \"reserved02\": \"Additional supporting info 1\",\r\n
+          \     \"billInquiryDetails\": {\r\n        \"payeeCNIC\": \"1234512345671\",\r\n
+          \       \"city\": \"Karachi\",\r\n        \"province\": \"Sindh\",\r\n        \"accountId\":
+          \"05421236547552\",\r\n        \"fromAccountType\": \"00\",\r\n        \"fromAccountTitle\":
+          \"Muhammad Ali & Hassan Ali\",\r\n        \"bundleId\": \"BUNDLE123456\",\r\n
+          \       \"bundleQuantity\": \"10\",\r\n        \"billStatus\": \"U\",\r\n
+          \       \"billingMonth\": \"2411\",\r\n        \"branchCode\": \"0421\",\r\n
+          \       \"branchName\": \"Test\",\r\n        \"dueDate\": \"241121\",\r\n
+          \       \"amountWithinDueDate\": \"+0000000050000\",\r\n        \"amountAfterDueDate\":
+          \"-0000000085050\",\r\n        \"totalLoanAmount\": \"000000500000\",\r\n
+          \       \"totalOutstandingAmount\": \"000000200000\",\r\n        \"feeAmount\":
+          \"000000001500\",\r\n        \"maxLimit\": \"000000100000\",\r\n        \"minLimit\":
+          \"000000010000\",\r\n        \"supportingInfo1\": \"Additional supporting
+          info 1\",\r\n        \"supportingInfo2\": \"Additional supporting info 2\"\r\n
+          \     }\r\n    }\r\n  }\r\n}\r\n"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{uat_url}}/payments/executeTrx"
+        host:
+        - "{{uat_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Mon, 23 Dec 2024 07:09:22 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "123446121456",
+              "stan": "123456",
+              "transactionDate": "21-11-2024 12:00:00",
+              "channel": "001",
+              "referenceNumber": "0900000000000000000000188",
+              "authCode": "123456",
+              "transaction": [
+                  {
+                      "code": "0050",
+                      "amount": 1000,
+                      "type": "D",
+                      "stan": "123456",
+                      "accountNumber": "0900000000000005",
+                      "postingDate": "22-11-2024 12:00:00.000",
+                      "narration": "Bill Payment"
+                  }
+              ]
+          }
+      }
+- name: Mobile topup
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2NDIxMDMxLCJleHAiOjE3MzY1MDc0MzF9.Ue7uAMevGudsmFxX6zOUgsuUmQ3TPBHB07EWSMKByns
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n  \"channel\": \"001\",\r\n  \"transactionDate\": \"21-11-2024 12:00:00\",\r\n
+        \ \"stan\": \"123456\",\r\n  \"rrn\": \"123446121416\",\r\n  \"systemId\":
+        \"00111223\",\r\n  \"transaction\": {\r\n    \"code\": \"0055\",\r\n    \"amount\":
+        {\r\n      \"currency\": \"PKR\",\r\n      \"value\": 1000\r\n    }\r\n  },\r\n
+        \ \"fromAccount\": {\r\n    \"accountNumber\": \"03001231234\",\r\n    \"accountTitle\":
+        \"Muhammad Ali & Hassan Ali\",\r\n    \"accountType\": \"00\",\r\n    \"accountCurrency\":
+        \"586\"\r\n  },\r\n  \"additionalInfo\": {\r\n    \"merchantInfo\": {},\r\n
+        \   \"terminalInfo\": {\r\n      \"terminalId\": \"ATM01\",\r\n      \"additionalTerminalLocation\":
+        \"000000\",\r\n      \"terminalLocation\": \"000000\",\r\n      \"pointOfServiceEntryMode\":
+        \"021\",\r\n      \"pointOfServiceConditionCode\": \"00\",\r\n      \"posPINCaptureCode\":
+        \"00\",\r\n      \"receiptGenerated\": \"00\"\r\n    },\r\n    \"reservedFields\":
+        {\r\n      \"reservedField01\": \"\",\r\n      \"reservedField02\": \"\",\r\n
+        \     \"reservedField03\": \"\",\r\n      \"reservedField04\": \"\",\r\n      \"reservedField05\":
+        \"\"\r\n    },\r\n    \"billInfo\": {\r\n      \"clientID\": \"HBLPAK\",\r\n
+        \     \"channelID\": \"00000003\",\r\n      \"stan\": \"654321\",\r\n      \"companyCode\":
+        \"UFONE0001\",\r\n      \"consumerNo\": \"123456789012345678901234\",\r\n
+        \     \"authID\": \"987654\",\r\n      \"responseDetail\": \"Transaction approved
+        successfully.\",\r\n      \"reserved01\": \"Additional supporting info 1\",\r\n
+        \     \"reserved02\": \"Additional supporting info 1\",\r\n      \"billInquiryDetails\":
+        {\r\n        \"payeeCNIC\": \"1234512345671\",\r\n        \"city\": \"Karachi\",\r\n
+        \       \"province\": \"Sindh\",\r\n        \"accountId\": \"05421236547552\",\r\n
+        \       \"fromAccountType\": \"00\",\r\n        \"fromAccountTitle\": \"Muhammad
+        Ali & Hassan Ali\",\r\n        \"bundleId\": \"BUNDLE123456\",\r\n        \"bundleQuantity\":
+        \"10\",\r\n        \"billStatus\": \"U\",\r\n        \"billingMonth\": \"2411\",\r\n
+        \       \"branchCode\": \"0421\",\r\n        \"branchName\": \"Test\",\r\n
+        \       \"dueDate\": \"241121\",\r\n        \"amountWithinDueDate\": \"+0000000050000\",\r\n
+        \       \"amountAfterDueDate\": \"-0000000085050\",\r\n        \"totalLoanAmount\":
+        \"000000500000\",\r\n        \"totalOutstandingAmount\": \"000000200000\",\r\n
+        \       \"feeAmount\": \"000000001500\",\r\n        \"maxLimit\": \"000000100000\",\r\n
+        \       \"minLimit\": \"000000010000\",\r\n        \"supportingInfo1\": \"Additional
+        supporting info 1\",\r\n        \"supportingInfo2\": \"Additional supporting
+        info 2\"\r\n      }\r\n    }\r\n  }\r\n}\r\n"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{uat_url}}/payments/executeTrx"
+      host:
+      - "{{uat_url}}"
+      path:
+      - payments
+      - executeTrx
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response:
+  - name: Mobile TopUp response
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2NDIxMDMxLCJleHAiOjE3MzY1MDc0MzF9.Ue7uAMevGudsmFxX6zOUgsuUmQ3TPBHB07EWSMKByns
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n  \"channel\": \"001\",\r\n  \"transactionDate\": \"21-11-2024
+          12:00:00\",\r\n  \"stan\": \"123456\",\r\n  \"rrn\": \"123446121456\",\r\n
+          \ \"systemId\": \"00111223\",\r\n  \"transaction\": {\r\n    \"code\": \"0055\",\r\n
+          \   \"amount\": {\r\n      \"currency\": \"PKR\",\r\n      \"value\": 1000\r\n
+          \   }\r\n  },\r\n  \"fromAccount\": {\r\n    \"accountNumber\": \"03001231234\",\r\n
+          \   \"accountTitle\": \"Muhammad Ali & Hassan Ali\",\r\n    \"accountType\":
+          \"00\",\r\n    \"accountCurrency\": \"586\"\r\n  },\r\n  \"additionalInfo\":
+          {\r\n    \"merchantInfo\": {},\r\n    \"terminalInfo\": {\r\n      \"terminalId\":
+          \"ATM01\",\r\n      \"additionalTerminalLocation\": \"000000\",\r\n      \"terminalLocation\":
+          \"000000\",\r\n      \"pointOfServiceEntryMode\": \"021\",\r\n      \"pointOfServiceConditionCode\":
+          \"00\",\r\n      \"posPINCaptureCode\": \"00\",\r\n      \"receiptGenerated\":
+          \"00\"\r\n    },\r\n    \"reservedFields\": {\r\n      \"reservedField01\":
+          \"\",\r\n      \"reservedField02\": \"\",\r\n      \"reservedField03\":
+          \"\",\r\n      \"reservedField04\": \"\",\r\n      \"reservedField05\":
+          \"\"\r\n    },\r\n    \"billInfo\": {\r\n      \"clientID\": \"HBLPAK\",\r\n
+          \     \"channelID\": \"00000003\",\r\n      \"stan\": \"654321\",\r\n      \"companyCode\":
+          \"UFONE0001\",\r\n      \"consumerNo\": \"123456789012345678901234\",\r\n
+          \     \"authID\": \"987654\",\r\n      \"responseDetail\": \"Transaction
+          approved successfully.\",\r\n      \"reserved01\": \"Additional supporting
+          info 1\",\r\n      \"reserved02\": \"Additional supporting info 1\",\r\n
+          \     \"billInquiryDetails\": {\r\n        \"payeeCNIC\": \"1234512345671\",\r\n
+          \       \"city\": \"Karachi\",\r\n        \"province\": \"Sindh\",\r\n        \"accountId\":
+          \"05421236547552\",\r\n        \"fromAccountType\": \"00\",\r\n        \"fromAccountTitle\":
+          \"Muhammad Ali & Hassan Ali\",\r\n        \"bundleId\": \"BUNDLE123456\",\r\n
+          \       \"bundleQuantity\": \"10\",\r\n        \"billStatus\": \"U\",\r\n
+          \       \"billingMonth\": \"2411\",\r\n        \"branchCode\": \"0421\",\r\n
+          \       \"branchName\": \"Test\",\r\n        \"dueDate\": \"241121\",\r\n
+          \       \"amountWithinDueDate\": \"+0000000050000\",\r\n        \"amountAfterDueDate\":
+          \"-0000000085050\",\r\n        \"totalLoanAmount\": \"000000500000\",\r\n
+          \       \"totalOutstandingAmount\": \"000000200000\",\r\n        \"feeAmount\":
+          \"000000001500\",\r\n        \"maxLimit\": \"000000100000\",\r\n        \"minLimit\":
+          \"000000010000\",\r\n        \"supportingInfo1\": \"Additional supporting
+          info 1\",\r\n        \"supportingInfo2\": \"Additional supporting info 2\"\r\n
+          \     }\r\n    }\r\n  }\r\n}\r\n"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Thu, 09 Jan 2025 14:29:39 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "123446121456",
+              "stan": "123456",
+              "transactionDate": "21-11-2024 12:00:00",
+              "channel": "001",
+              "referenceNumber": "0900000000000000000000321",
+              "authCode": "123456",
+              "transaction": [
+                  {
+                      "code": "0055",
+                      "amount": 1000,
+                      "type": "D",
+                      "stan": "123456",
+                      "productCode": "0010",
+                      "accountNumber": "03001231234",
+                      "postingDate": "10-01-2025 19:29:35.821",
+                      "narration": "Mobile Top-up"
+                  }
+              ]
+          }
+      }
+- name: Balance Inquiry
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Successful PUT request", function () {
+      - "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);"
+      - "});"
+      - ''
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2NzU2NzA0LCJleHAiOjE3MzY4NDMxMDR9.lY-L8Q6Cg8JS_1MRoE2OMwPjxvxYtBRzlaBOeR1K2Yw
+      type: text
+    body:
+      mode: raw
+      raw: |-
+        {
+          "rrn": "123412341234",
+          "stan": "123412",
+          "channel": "001",
+          "transactionDate": "21-11-2024 12:00:00.000",
+          "transaction": {
+            "code": "0040"
+          },
+          "fromAccount": {
+            "accountNumber": "03001231235"
+          }
+        }
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{uat_url}}/payments/balanceInquiry"
+      host:
+      - "{{uat_url}}"
+      path:
+      - payments
+      - balanceInquiry
+    description: |-
+      This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).
+
+      A successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code.
+  response:
+  - name: Balance Inquiry response
+    originalRequest:
+      method: POST
+      header: []
+      body:
+        mode: raw
+        raw: |-
+          {
+            "rrn": "123412341234",
+            "stan": "123412",
+            "channel": "001",
+            "transactionDate": "21-11-2024 12:00:00.000",
+            "transaction": {
+              "code": "0040"
+            },
+            "toAccount": {
+              "accountNumber": "212900100000001"
+            },
+              "additionalInfo": {
+                "reservedFields": {
+                  "reservedField01": "",
+                  "reservedField02": ""
+              }
+            }
+          }
+        options:
+          raw:
+            language: json
+      url:
+        raw: localhost:8080/api/v1/wallet/payments/balanceInquiry
+        host:
+        - localhost
+        port: '8080'
+        path:
+        - api
+        - v1
+        - wallet
+        - payments
+        - balanceInquiry
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Content-Type
+      value: application/json
+      description: ''
+      type: text
+    cookie: []
+    body: "{\r\n  \"responseCode\": \"00\",\r\n  \"responseDesc\": \"SUCCESS\",\r\n
+      \ \"data\": {\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"21-11-2024
+      12:00:00.000\",\r\n    \"stan\": \"123456\",\r\n    \"rrn\": \"123456123456\",\r\n
+      \   \"referenceNumber\": \"21290000000000000001\",\r\n    \"transaction\": {\r\n
+      \     \"code\": \"0040\"\r\n    },\r\n    \"toAccount\": {\r\n      \"accountNumber\":
+      \"212900100000001\",\r\n      \"iban\": \"PK00CDNS0212900100000001\",\r\n      \"title\":
+      \"Waqas Nizam\",\r\n      \"currentBalance\": 200,\r\n      \"availableBalance\":
+      200,\r\n      \"currency\": \"PKR\"\r\n    },\r\n    \"additionalInfo\": {\r\n
+      \     \"reservedFields\": {\r\n        \"reservedField01\": \"\",\r\n        \"reservedField02\":
+      \"\"\r\n    }\r\n  }\r\n  }\r\n}"
+  - name: Balance Inquiry (updated)
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2NzU2NzA0LCJleHAiOjE3MzY4NDMxMDR9.lY-L8Q6Cg8JS_1MRoE2OMwPjxvxYtBRzlaBOeR1K2Yw
+        type: text
+      body:
+        mode: raw
+        raw: |-
+          {
+            "rrn": "123412341234",
+            "stan": "123412",
+            "channel": "001",
+            "transactionDate": "21-11-2024 12:00:00.000",
+            "transaction": {
+              "code": "0040"
+            },
+            "fromAccount": {
+              "accountNumber": "03001231235"
+            }
+          }
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/balanceInquiry"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - balanceInquiry
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Mon, 13 Jan 2025 08:51:10 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "123412341234",
+              "stan": "123412",
+              "transactionDate": "21-11-2024 12:00:00.000",
+              "channel": "001",
+              "transaction": {
+                  "code": "0040"
+              },
+              "fromAccount": {
+                  "accountNumber": "03001231235",
+                  "iban": "PK32CRSM0000003001231235",
+                  "title": "NAQASH",
+                  "customerType": "Single",
+                  "currency": "586",
+                  "currentBalance": 195046,
+                  "availableBalance": 195046
+              }
+          }
+      }
+- name: Wallet to wallet
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Status code is 200", function () {
+      - "    pm.response.to.have.status(200);"
+      - "});"
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2MzIzOTM0LCJleHAiOjE3MzY0MTAzMzR9.oMfiH-d_9bonOf7gFcgDeSrhGV2IRdwUje3ORP5nKIU
+      type: text
+    body:
+      mode: raw
+      raw: "{\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"21-11-2024
+        12:00:00\",\r\n    \"stan\": \"123156\",\r\n    \"rrn\": \"123916223351\",\r\n
+        \   \"systemId\": \"00111223\",\r\n    \"transaction\": {\r\n        \"code\":
+        \"0090\",\r\n        \"purposeCode\": \"0112\",\r\n        \"narration\":
+        \"Test transaction\",\r\n        \"amount\": {\r\n            \"currency\":
+        \"PKR\",\r\n            \"value\": 1000\r\n        }\r\n    },\r\n    \"fromAccount\":
+        {\r\n        \"accountNumber\": \"03001231234\",\r\n        \"accountTitle\":
+        \"Muhammad Ali & Hassan Ali\"\r\n    },\r\n    \"toAccount\": {\r\n        \"accountNumber\":
+        \"03001231235\",\r\n        \"accountTitle\": \"Hassan Ali\"\r\n    },\r\n
+        \   \"additionalInfo\": {\r\n        \r\n        \"reservedFields\": {\r\n
+        \           \"reservedField01\": \"\",\r\n            \"reservedField02\":
+        \"\",\r\n            \"reservedField03\": \"\",\r\n            \"reservedField04\":
+        \"\",\r\n            \"reservedField05\": \"\"\r\n        }\r\n    }\r\n}"
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{base_url}}/payments/executeTrx"
+      host:
+      - "{{base_url}}"
+      path:
+      - payments
+      - executeTrx
+    description: |-
+      This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+      A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+  response:
+  - name: Wallet to wallet
+    originalRequest:
+      method: POST
+      header:
+      - key: Authorization
+        value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM2MzIzOTM0LCJleHAiOjE3MzY0MTAzMzR9.oMfiH-d_9bonOf7gFcgDeSrhGV2IRdwUje3ORP5nKIU
+        type: text
+      body:
+        mode: raw
+        raw: "{\r\n    \"channel\": \"001\",\r\n    \"transactionDate\": \"21-11-2024
+          12:00:00\",\r\n    \"stan\": \"123156\",\r\n    \"rrn\": \"123916223351\",\r\n
+          \   \"systemId\": \"00111223\",\r\n    \"transaction\": {\r\n        \"code\":
+          \"0090\",\r\n        \"purposeCode\": \"0112\",\r\n        \"narration\":
+          \"Test transaction\",\r\n        \"amount\": {\r\n            \"currency\":
+          \"PKR\",\r\n            \"value\": 1000\r\n        }\r\n    },\r\n    \"fromAccount\":
+          {\r\n        \"accountNumber\": \"03001231234\",\r\n        \"accountTitle\":
+          \"Muhammad Ali & Hassan Ali\"\r\n    },\r\n    \"toAccount\": {\r\n        \"accountNumber\":
+          \"03001231235\",\r\n        \"accountTitle\": \"Hassan Ali\"\r\n    },\r\n
+          \   \"additionalInfo\": {\r\n        \r\n        \"reservedFields\": {\r\n
+          \           \"reservedField01\": \"\",\r\n            \"reservedField02\":
+          \"\",\r\n            \"reservedField03\": \"\",\r\n            \"reservedField04\":
+          \"\",\r\n            \"reservedField05\": \"\"\r\n        }\r\n    }\r\n}"
+        options:
+          raw:
+            language: json
+      url:
+        raw: "{{base_url}}/payments/executeTrx"
+        host:
+        - "{{base_url}}"
+        path:
+        - payments
+        - executeTrx
+    status: OK
+    code: 200
+    _postman_previewlanguage: json
+    header:
+    - key: Vary
+      value: Origin
+    - key: Vary
+      value: Access-Control-Request-Method
+    - key: Vary
+      value: Access-Control-Request-Headers
+    - key: X-Content-Type-Options
+      value: nosniff
+    - key: X-XSS-Protection
+      value: '0'
+    - key: Cache-Control
+      value: no-cache, no-store, max-age=0, must-revalidate
+    - key: Pragma
+      value: no-cache
+    - key: Expires
+      value: '0'
+    - key: X-Frame-Options
+      value: DENY
+    - key: Content-Type
+      value: application/json
+    - key: Transfer-Encoding
+      value: chunked
+    - key: Date
+      value: Wed, 08 Jan 2025 11:00:41 GMT
+    - key: Keep-Alive
+      value: timeout=60
+    - key: Connection
+      value: keep-alive
+    cookie: []
+    body: |-
+      {
+          "responseCode": "00",
+          "responseDesc": "SUCCESS",
+          "data": {
+              "rrn": "123916223351",
+              "stan": "123156",
+              "transactionDate": "21-11-2024 12:00:00",
+              "channel": "001",
+              "referenceNumber": "0900000000000000000000277",
+              "authCode": "123156",
+              "transaction": [
+                  {
+                      "code": "0090",
+                      "amount": 1000,
+                      "type": "D",
+                      "stan": "123156",
+                      "accountNumber": "03001231234",
+                      "postingDate": "09-01-2025 16:00:40.835",
+                      "narration": "Wallet Debit"
+                  },
+                  {
+                      "code": "0091",
+                      "amount": 1000,
+                      "type": "C",
+                      "stan": "123156",
+                      "accountNumber": "03001231235",
+                      "postingDate": "09-01-2025 16:00:41.246",
+                      "narration": "Wallet Credit"
+                  }
+              ]
+          }
+      }
+- name: GL posting
+  event:
+  - listen: test
+    script:
+      exec:
+      - pm.test("Successful PUT request", function () {
+      - "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);"
+      - "});"
+      - ''
+      type: text/javascript
+      packages: {}
+  request:
+    method: POST
+    header:
+    - key: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvcGVud2FsbGV0fE9XIiwiaWF0IjoxNzM0OTY4NjgyLCJleHAiOjE3MzUwNTUwODJ9.tvEeG7q0-LhV1gHIo6byUzcGE1o86Sxxfl5C0FkdBsg
+      type: text
+    body:
+      mode: raw
+      raw: |-
+        {
+          "rrn": "123412341234",
+          "stan": "123412",
+          "channel": "001",
+          "transactionDate": "21-11-2024 12:00:00.000",
+          "transaction": {
+            "code": "0040"
+          },
+          "toAccount": {
+            "accountNumber": "0900000000000005"
+          }
+        }
+      options:
+        raw:
+          language: json
+    url:
+      raw: "{{uat_url}}/payments/balanceInquiry"
+      host:
+      - "{{uat_url}}"
+      path:
+      - payments
+      - balanceInquiry
+    description: |-
+      This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).
+
+      A successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code.
+  response: []
+- name: Incoming IBFT Simlator Request To SAF-ISO-CONSUMER
+  request:
+    method: POST
+    header: []
+    body:
+      mode: raw
+      raw: "{\r\n  \"mti\": \"0220\", // 0200 message type for titlefetch\r\n  \"dataElements\":
+        {\r\n    \"DE2\": \"923006XX5135\",\r\n    \"DE3\": \"480000\", //62 proc
+        code for titlefetch \r\n    \"DE4\": \"000001000000\",\r\n    \"DE7\": \"0416121249\",\r\n
+        \   \"DE11\": \"776301\",\r\n    \"DE12\": \"131249\",\r\n    \"DE13\": \"1217\",\r\n
+        \   \"DE15\": \"0417\",\r\n    \"DE18\": \"0003\",\r\n    \"DE22\": \"021\",\r\n
+        \   \"DE24\": \"001\",\r\n    \"DE32\": \"63939000000\",\r\n    \"DE33\":
+        \"000001\",\r\n    \"DE37\": \"776301240416\",\r\n    \"DE41\": \"92300656\",\r\n
+        \   \"DE42\": \"63939000000    \",\r\n    \"DE43\": \"TELENOR BANK             MOBILE
+        \      PK\",\r\n    \"DE48\": \"0350\",\r\n    \"DE49\": \"586\",\r\n    \"DE102\":
+        \"03001231234\",\r\n    \"DE103\": \"PK59CRSM0000003001231234\",\r\n    \"DE120\":
+        \"05334064756625                                    6393900000095860000000C\"\r\n
+        \ }\r\n}"
+      options:
+        raw:
+          language: json
+    url:
+      raw: http://10.6.60.5:9990/api/processMessage
+      protocol: http
+      host:
+      - '10'
+      - '6'
+      - '60'
+      - '5'
+      port: '9990'
+      path:
+      - api
+      - processMessage
+  response: []
+event:
+- listen: prerequest
+  script:
+    type: text/javascript
+    exec:
+    - ''
+- listen: test
+  script:
+    type: text/javascript
+    exec:
+    - ''
+variable:
+- key: base_url
+  value: localhost:8000/api/v1/wallet
+- key: postman_url
+  value: https://7028093b-53ca-45bb-bbb4-02479e521fa1.mock.pstmn.io/api/v1
+  type: string
+- key: uat_url
+  value: 10.6.60.8:8000/api/v1/wallet
+  type: string
